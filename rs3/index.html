@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audi RS3 Sportback 2011</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+        
+        /* 25% ZOOM GLOBAL */
+        html {
+            font-size: 125%;
+            scroll-behavior: smooth;
+        }
+        
+        * { 
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-darker: #000000;
+            --bg-card: #1a0a0a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent: #dc2626;
+            --accent-dark: #b91c1c;
+            --accent-light: #ef4444;
+        }
+
+        body.light-mode {
+            --bg-dark: #f5f5f5;
+            --bg-darker: #ffffff;
+            --bg-card: #fff0f0;
+            --text-primary: #1a0a0a;
+            --text-secondary: #555555;
+            --accent: #dc2626;
+            --accent-dark: #b91c1c;
+            --accent-light: #ef4444;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        /* Mouse Gradient - VERBESSERTER ÜBERGANG */
+        .mouse-gradient {
+            position: fixed; pointer-events: none; z-index: 9999;
+            width: 350px; height: 350px; border-radius: 50%;
+            filter: blur(100px); /* ← Erhöht für weicheren Übergang */
+            opacity: 0.25; mix-blend-mode: screen;
+            transform: translate(-50%, -50%);
+        }
+        .gradient-1 { 
+            background: radial-gradient(circle, rgba(220,38,38,0.5) 0%, rgba(220,38,38,0.3) 25%, rgba(220,38,38,0.1) 50%, transparent 100%);
+        }
+        .gradient-2 { 
+            background: radial-gradient(circle, rgba(185,28,28,0.4) 0%, rgba(185,28,28,0.2) 30%, rgba(185,28,28,0.05) 60%, transparent 100%);
+        }
+        .gradient-3 { 
+            background: radial-gradient(circle, rgba(239,68,68,0.3) 0%, rgba(239,68,68,0.15) 40%, rgba(239,68,68,0.02) 70%, transparent 100%);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed; top: 16px; right: 16px; z-index: 50;
+            background: rgba(220,38,38,0.1); border: 1.5px solid rgba(220,38,38,0.3);
+            border-radius: 50px; padding: 8px 16px; cursor: pointer;
+            transition: all 0.3s ease; display: flex; align-items: center;
+            gap: 8px; font-weight: 600; font-size: 0.8rem;
+            color: var(--accent); backdrop-filter: blur(10px);
+        }
+        .theme-toggle:hover {
+            background: rgba(220,38,38,0.2);
+            box-shadow: 0 0 15px rgba(220,38,38,0.3);
+        }
+
+        /* Glassmorphism */
+        .glassmorphic {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-radius: 16px; transition: all 0.3s ease;
+        }
+        .glassmorphic:hover {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(220,38,38,0.3);
+            box-shadow: 0 6px 24px rgba(220,38,38,0.1);
+            transform: translateY(-3px);
+        }
+        body.light-mode .glassmorphic {
+            background: rgba(255,255,255,0.7);
+            border: 1px solid rgba(220,38,38,0.2);
+        }
+        body.light-mode .glassmorphic:hover {
+            background: rgba(255,255,255,0.9);
+            border: 1px solid rgba(220,38,38,0.4);
+        }
+
+        /* Section Progress */
+        .section-progress-bar {
+            position: fixed; right: 24px; top: 50%;
+            transform: translateY(-50%); z-index: 40;
+            display: flex; flex-direction: column; gap: 32px;
+        }
+        .section-progress-item {
+            display: flex; align-items: center; gap: 10px;
+            cursor: pointer; transition: all 0.3s ease;
+            opacity: 0.4; transform: translateX(0);
+        }
+        .section-progress-item.active { opacity: 1; transform: translateX(-6px); }
+        .section-progress-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: rgba(220,38,38,0.4);
+            border: 1.5px solid rgba(220,38,38,0.6);
+            transition: all 0.3s ease;
+        }
+        .section-progress-item.active .section-progress-dot {
+            width: 12px; height: 12px;
+            background: var(--accent); border-color: var(--accent);
+            box-shadow: 0 0 12px rgba(220,38,38,0.8);
+        }
+        .section-progress-label {
+            font-size: 0.65rem; font-weight: 600;
+            color: rgba(220,38,38,0.6); letter-spacing: 0.5px;
+            white-space: nowrap; text-transform: uppercase;
+            min-width: 60px; text-align: right;
+        }
+        .section-progress-item.active .section-progress-label {
+            color: var(--accent); font-weight: 700;
+        }
+        @media (max-width: 768px) {
+            .section-progress-bar { display: none; }
+            .theme-toggle { top: 70px; right: 8px; }
+        }
+
+        /* Colors */
+        .rs3-accent { color: var(--accent); text-shadow: 0 0 15px rgba(220,38,38,0.4); }
+        .rs3-accent-gradient {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+
+        /* Animations */
+        .audi-ring { animation: ringPulse 2s ease-in-out infinite; }
+        @keyframes ringPulse {
+            0%,100% { opacity:1; transform:scale(1); }
+            50% { opacity:0.8; transform:scale(1.03); }
+        }
+        @keyframes glow {
+            0%,100% { box-shadow: 0 0 15px rgba(220,38,38,0.3); }
+            50% { box-shadow: 0 0 30px rgba(220,38,38,0.5); }
+        }
+        .scroll-indicator { animation: bounce 3s ease-in-out infinite; }
+        @keyframes bounce {
+            0%,20%,50%,80%,100% { transform:translateY(0); }
+            40% { transform:translateY(-10px); }
+            60% { transform:translateY(-5px); }
+        }
+        @keyframes badgePulse {
+            0%,100% { box-shadow: 0 0 0 0 rgba(220,38,38,0.6); }
+            50% { box-shadow: 0 0 0 8px rgba(220,38,38,0); }
+        }
+        .header-badge { animation: badgePulse 2s ease-in-out infinite; }
+
+        /* Hero - VERBESSERTER ÜBERGANG */
+        .hero-gradient {
+            background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-card) 50%, var(--bg-darker) 100%);
+            position: relative; overflow: hidden;
+        }
+        .hero-gradient::before {
+            content: ''; position: absolute; inset: 0;
+            background: 
+                radial-gradient(ellipse 800px 400px at 20% 50%, rgba(220,38,38,0.06) 0%, transparent 40%),
+                radial-gradient(ellipse 900px 500px at 80% 50%, rgba(220,38,38,0.04) 0%, transparent 45%),
+                radial-gradient(ellipse 700px 600px at 50% 100%, rgba(220,38,38,0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* Parallax */
+        .parallax { position: relative; overflow: hidden; }
+        .parallax-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: 0; will-change: transform;
+        }
+        .parallax-content { position: relative; z-index: 10; }
+
+        /* Nav */
+        nav {
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            background: rgba(0,0,0,0.7); border-bottom: 1px solid rgba(220,38,38,0.15);
+            transition: all 0.3s ease;
+        }
+        body.light-mode nav {
+            background: rgba(255,255,255,0.85);
+            border-bottom: 1px solid rgba(220,38,38,0.15);
+        }
+        nav.scrolled { background: rgba(0,0,0,0.92); box-shadow: 0 8px 32px rgba(0,0,0,0.5); }
+
+        .nav-link {
+            position: relative; font-weight: 600; font-size: 0.85rem;
+            letter-spacing: 0.5px; color: var(--text-secondary); transition: color 0.3s ease;
+        }
+        .nav-link:hover { color: var(--text-primary); }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: -3px; left: 0;
+            width: 0; height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            transition: width 0.3s ease; border-radius: 2px;
+        }
+        .nav-link:hover::after { width: 100%; }
+
+        /* Stat Numbers */
+        .stat-number {
+            font-size: 1.5rem; font-weight: 900;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; line-height: 1;
+        }
+
+        /* Buttons */
+        .btn-premium {
+            position: relative; overflow: hidden;
+            padding: 12px 28px; font-weight: 700; font-size: 0.82rem;
+            letter-spacing: 1px; border-radius: 50px;
+            transition: all 0.3s ease; text-transform: uppercase;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: white; box-shadow: 0 8px 28px rgba(220,38,38,0.3);
+            border: 2px solid transparent;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 40px rgba(220,38,38,0.45);
+        }
+        .btn-secondary {
+            background: transparent; color: var(--accent);
+            border: 2px solid rgba(220,38,38,0.4);
+        }
+        .btn-secondary:hover {
+            background: rgba(220,38,38,0.1); border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* Spec Cards */
+        .spec-card {
+            transition: all 0.3s ease; position: relative; overflow: hidden;
+        }
+        .spec-card::before {
+            content: ''; position: absolute; top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(220,38,38,0.15), transparent);
+            transition: left 0.5s ease;
+        }
+        .spec-card:hover::before { left: 100%; }
+        .spec-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(220,38,38,0.2);
+            border-color: var(--accent) !important;
+        }
+
+        /* Section Dark - VERBESSERTER ÜBERGANG */
+        .section-dark {
+            position: relative;
+            background: linear-gradient(180deg, var(--bg-darker) 0%, var(--bg-card) 50%, var(--bg-darker) 100%);
+            transition: all 0.3s ease;
+        }
+        .section-dark::before {
+            content: ''; position: absolute; inset: 0;
+            background: 
+                radial-gradient(ellipse 900px 500px at 50% 0%, rgba(220,38,38,0.05) 0%, transparent 50%),
+                radial-gradient(ellipse 800px 400px at 50% 100%, rgba(220,38,38,0.03) 0%, transparent 55%);
+            pointer-events: none;
+        }
+
+        /* Gallery */
+        .image-gallery .gallery-item {
+            position: relative; overflow: hidden; border-radius: 14px;
+            cursor: pointer;
+        }
+        .image-gallery .gallery-item::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(circle at center, rgba(220,38,38,0.15) 0%, transparent 70%);
+            opacity: 0; transition: opacity 0.3s ease; z-index: 2;
+        }
+        .image-gallery .gallery-item:hover::before { opacity: 1; }
+
+        .image-gallery img {
+            width: 100%; height: 100%; object-fit: cover;
+            display: block;
+            transition: filter 0.3s ease;
+            cursor: zoom-in;
+        }
+        .image-gallery .gallery-item:hover img {
+            filter: brightness(1.08);
+        }
+
+        .gallery-item-number {
+            position: absolute; top: 12px; right: 12px;
+            background: rgba(220,38,38,0.85); color: white;
+            width: 36px; height: 36px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 0.85em;
+            opacity: 0; transform: scale(0);
+            transition: all 0.3s ease; z-index: 3;
+        }
+        .image-gallery .gallery-item:hover .gallery-item-number {
+            opacity: 1; transform: scale(1);
+        }
+
+        /* Gallery Pagination */
+        .gallery-page { display: none; }
+        .gallery-page.active { display: contents; }
+
+        .gallery-pagination {
+            display: flex; align-items: center; justify-content: center;
+            gap: 14px; margin-top: 32px;
+        }
+        .gallery-page-btn {
+            display: flex; align-items: center; gap: 6px;
+            padding: 10px 22px; border-radius: 50px;
+            font-weight: 700; font-size: 0.8rem; letter-spacing: 0.5px;
+            cursor: pointer; transition: all 0.3s ease;
+            border: 1.5px solid var(--accent); color: var(--accent);
+            background: transparent;
+        }
+        .gallery-page-btn:hover:not(:disabled) {
+            background: rgba(220,38,38,0.12);
+            box-shadow: 0 0 16px rgba(220,38,38,0.25);
+            transform: translateY(-2px);
+        }
+        .gallery-page-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+        .gallery-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: rgba(220,38,38,0.3); border: 1.5px solid rgba(220,38,38,0.5);
+            cursor: pointer; transition: all 0.3s ease;
+        }
+        .gallery-dot.active {
+            background: var(--accent);
+            box-shadow: 0 0 8px rgba(220,38,38,0.6);
+            transform: scale(1.3);
+        }
+
+        /* Modal Zoom */
+        .modal-zoom {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.98);
+            animation: fadeIn 0.3s ease;
+            overflow: hidden;
+        }
+
+        .modal-zoom.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .modal-zoom-content {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            padding: 0;
+        }
+
+        .modal-zoom img {
+            width: auto;
+            height: auto;
+            max-width: calc(100vw - 60px);
+            max-height: calc(100vh - 100px);
+            object-fit: contain;
+            display: block;
+            border-radius: 6px;
+            animation: zoomIn 0.3s ease;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-zoom-close {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 3rem;
+            color: white;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            transition: all 0.3s ease;
+            z-index: 1001;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .modal-zoom-close:hover {
+            transform: scale(1.2);
+            color: var(--accent);
+        }
+
+        .modal-zoom-info {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 0.9rem;
+            background: rgba(0,0,0,0.7);
+            padding: 10px 20px;
+            border-radius: 50px;
+            z-index: 1001;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Timeline */
+        .timeline-container { position: relative; padding: 40px 0; }
+        .timeline-line {
+            position: absolute; left: 50%; top: 0; bottom: 0; width: 3px;
+            background: linear-gradient(180deg, var(--accent) 0%, var(--accent-dark) 50%, var(--accent) 100%);
+            transform: translateX(-50%);
+        }
+        .timeline-items { position: relative; z-index: 1; }
+        .timeline-item { margin-bottom: 40px; position: relative; }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: 0; margin-right: auto; width: 44%; text-align: right;
+        }
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: auto; margin-right: 0; width: 44%; text-align: left;
+        }
+
+        .timeline-dot {
+            position: absolute; left: 50%; top: 20px;
+            width: 18px; height: 18px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border: 3px solid var(--bg-darker); border-radius: 50%;
+            transform: translateX(-50%); z-index: 10;
+            box-shadow: 0 0 14px rgba(220,38,38,0.6);
+            animation: dotPulse 2s ease-in-out infinite;
+        }
+        @keyframes dotPulse {
+            0%,100% { box-shadow: 0 0 14px rgba(220,38,38,0.6); transform: translateX(-50%) scale(1); }
+            50% { box-shadow: 0 0 28px rgba(220,38,38,0.8); transform: translateX(-50%) scale(1.15); }
+        }
+
+        .timeline-content {
+            background: rgba(255,255,255,0.04);
+            border: 1.5px solid rgba(220,38,38,0.15);
+            border-radius: 14px; padding: 20px 24px;
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+        }
+        .timeline-content:hover {
+            transform: translateY(-4px); border-color: var(--accent);
+            box-shadow: 0 14px 36px rgba(220,38,38,0.15);
+            background: rgba(255,255,255,0.08);
+        }
+        .timeline-year {
+            font-size: 1.8rem; font-weight: 900;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; margin-bottom: 6px; display: inline-block;
+        }
+        .timeline-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+        .timeline-description { color: var(--text-secondary); line-height: 1.7; font-size: 0.87rem; margin-bottom: 14px; }
+        .timeline-badge {
+            display: inline-block; background: rgba(220,38,38,0.15);
+            border: 1px solid rgba(220,38,38,0.4); color: var(--accent);
+            padding: 5px 12px; border-radius: 50px; font-size: 0.78rem; font-weight: 600;
+        }
+
+        .timeline-item {
+            opacity: 0; transform: translateY(30px);
+            animation: timelineReveal 0.5s ease-out forwards;
+        }
+        @keyframes timelineReveal { to { opacity:1; transform:translateY(0); } }
+        .timeline-item:nth-child(1) { animation-delay:0.05s; }
+        .timeline-item:nth-child(2) { animation-delay:0.1s; }
+        .timeline-item:nth-child(3) { animation-delay:0.15s; }
+        .timeline-item:nth-child(4) { animation-delay:0.2s; }
+        .timeline-item:nth-child(5) { animation-delay:0.25s; }
+        .timeline-item:nth-child(6) { animation-delay:0.3s; }
+        .timeline-item:nth-child(7) { animation-delay:0.35s; }
+        .timeline-item:nth-child(8) { animation-delay:0.4s; }
+
+        @media (max-width: 1024px) {
+            .timeline-line { left: 20px; }
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                margin-left: 52px; margin-right: 0;
+                width: calc(100% - 52px); text-align: left;
+            }
+            .timeline-dot { left: 20px; }
+        }
+
+        /* Generation Cards */
+        .generation-card {
+            position: relative; overflow: hidden; border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+        .generation-card-image {
+            width: 100%; height: 220px; object-fit: cover;
+            display: block; transition: filter 0.3s ease;
+        }
+        .generation-card:hover .generation-card-image {
+            filter: brightness(1.08);
+        }
+        .generation-card-image-wrapper {
+            width: 100%; height: 220px;
+            background: linear-gradient(135deg, rgba(220,38,38,0.2), rgba(185,28,28,0.1));
+            overflow: hidden;
+        }
+        .generation-card-content {
+            padding: 18px; background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(220,38,38,0.15); border-top: none;
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+        }
+        .generation-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 16px 36px rgba(220,38,38,0.15);
+        }
+        .generation-specs {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 10px; margin: 12px 0;
+        }
+        .generation-spec-item {
+            background: rgba(220,38,38,0.08); padding: 10px;
+            border-radius: 10px; border: 1px solid rgba(220,38,38,0.15);
+            text-align: center;
+        }
+        .generation-spec-value {
+            font-size: 1.2rem; font-weight: 700; color: var(--accent);
+            margin-bottom: 2px; line-height: 1.2;
+        }
+        .generation-spec-label { font-size: 0.68rem; opacity: 0.7; text-transform: uppercase; }
+        .gen-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: white; padding: 4px 12px; border-radius: 50px;
+            font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+        }
+        .gen-highlights {
+            background: rgba(220,38,38,0.06); padding: 12px;
+            border-radius: 10px; border: 1px solid rgba(220,38,38,0.15);
+        }
+        .gen-highlights-title {
+            font-size: 0.75rem; font-weight: 700; color: var(--accent);
+            margin-bottom: 8px; text-transform: uppercase;
+        }
+        .gen-highlights-list { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+        .gen-highlight-item {
+            font-size: 0.72rem; color: var(--text-secondary);
+            padding: 4px 0; display: flex; align-items: center;
+        }
+        .gen-highlight-item::before {
+            content: '✓'; color: var(--accent);
+            font-weight: 900; margin-right: 5px; font-size: 0.8rem;
+        }
+
+        /* Feature Card */
+        .feature-card { transition: all 0.3s ease; }
+        .feature-card:hover { transform: translateY(-5px); }
+
+        /* Scroll Reveal */
+        .scroll-reveal {
+            opacity: 0; transform: translateY(50px);
+            transition: opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1);
+        }
+        .scroll-reveal.revealed { opacity: 1; transform: translateY(0); }
+        .scroll-reveal-left {
+            opacity: 0; transform: translateX(-60px);
+            transition: opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1);
+        }
+        .scroll-reveal-left.revealed { opacity: 1; transform: translateX(0); }
+        .scroll-reveal-right {
+            opacity: 0; transform: translateX(60px);
+            transition: opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1);
+        }
+        .scroll-reveal-right.revealed { opacity: 1; transform: translateX(0); }
+        .scroll-reveal-scale {
+            opacity: 0; transform: scale(0.9);
+            transition: opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1);
+        }
+        .scroll-reveal-scale.revealed { opacity: 1; transform: scale(1); }
+        .scroll-reveal-delay-1 { transition-delay: 0.1s; }
+        .scroll-reveal-delay-2 { transition-delay: 0.2s; }
+        .scroll-reveal-delay-3 { transition-delay: 0.3s; }
+        .scroll-reveal-delay-4 { transition-delay: 0.4s; }
+        .scroll-reveal-delay-5 { transition-delay: 0.5s; }
+
+        /* Video */
+        .video-overlay {
+            position: absolute; inset: 0; background: rgba(0,0,0,0.35);
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s ease; border-radius: 18px;
+        }
+        .video-overlay:hover { background: rgba(0,0,0,0.15); }
+        .play-button {
+            width: 72px; height: 72px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s ease; box-shadow: 0 8px 28px rgba(220,38,38,0.4);
+        }
+        .video-overlay:hover .play-button {
+            transform: scale(1.15);
+            box-shadow: 0 12px 40px rgba(220,38,38,0.6);
+        }
+        .video-badge {
+            position: absolute; top: 14px; left: 14px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            padding: 7px 16px; border-radius: 50px; font-size: 0.72rem;
+            font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+            z-index: 10; color: white;
+        }
+
+        /* Specs grid */
+        .specs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+    </style>
+</head>
+<body class="dark-mode">
+
+<!-- Mouse Gradient -->
+<div class="mouse-gradient gradient-1" id="mg1"></div>
+<div class="mouse-gradient gradient-2" id="mg2"></div>
+<div class="mouse-gradient gradient-3" id="mg3"></div>
+
+<!-- Theme Toggle -->
+<button class="theme-toggle" id="themeToggle">
+    <span id="themeIcon">🌙</span>
+    <span id="themeText">Dark</span>
+</button>
+
+<!-- Section Progress Bar -->
+<div class="section-progress-bar" id="progressBar">
+    <div class="section-progress-item active" data-section="home">
+        <div class="section-progress-label">Home</div>
+        <div class="section-progress-dot"></div>
+    </div>
+    <div class="section-progress-item" data-section="gallery">
+        <div class="section-progress-label">Galerie</div>
+        <div class="section-progress-dot"></div>
+    </div>
+    <div class="section-progress-item" data-section="specs">
+        <div class="section-progress-label">Technik</div>
+        <div class="section-progress-dot"></div>
+    </div>
+    <div class="section-progress-item" data-section="video">
+        <div class="section-progress-label">Video</div>
+        <div class="section-progress-dot"></div>
+    </div>
+    <div class="section-progress-item" data-section="timeline">
+        <div class="section-progress-label">Geschichte</div>
+        <div class="section-progress-dot"></div>
+    </div>
+    <div class="section-progress-item" data-section="generations">
+        <div class="section-progress-label">Generationen</div>
+        <div class="section-progress-dot"></div>
+    </div>
+</div>
+
+<!-- Navigation -->
+<nav class="fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="flex items-center justify-between h-16">
+            <div class="flex items-center space-x-2">
+                <svg class="w-9 h-9 text-white audi-ring" viewBox="0 0 100 100">
+                    <circle cx="20" cy="50" r="15" stroke="currentColor" stroke-width="3" fill="none"/>
+                    <circle cx="40" cy="50" r="15" stroke="currentColor" stroke-width="3" fill="none"/>
+                    <circle cx="60" cy="50" r="15" stroke="currentColor" stroke-width="3" fill="none"/>
+                    <circle cx="80" cy="50" r="15" stroke="currentColor" stroke-width="3" fill="none"/>
+                </svg>
+                <span class="text-lg font-black tracking-wider">RS3 <span class="rs3-accent">2011</span></span>
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#gallery" class="nav-link">Galerie</a>
+                <a href="#specs" class="nav-link">Technik</a>
+                <a href="#video" class="nav-link">Video</a>
+                <a href="#timeline" class="nav-link">Geschichte</a>
+                <a href="#generations" class="nav-link">Generationen</a>
+            </div>
+            <button class="md:hidden text-white" id="mobileMenuBtn">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section id="home" class="hero-gradient min-h-screen flex items-center justify-center pt-24 relative overflow-hidden parallax">
+    <img src="https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=1200&h=600&fit=crop"
+         alt="bg" class="parallax-bg" style="opacity:0.08;">
+
+    <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-32 right-16 w-64 h-64 bg-red-700 rounded-full mix-blend-multiply filter blur-3xl opacity-8 animate-pulse"></div>
+        <div class="absolute bottom-32 left-16 w-64 h-64 bg-red-900 rounded-full mix-blend-multiply filter blur-3xl opacity-8 animate-pulse"></div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-4 py-16 relative z-10 parallax-content">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <div class="inline-block scroll-reveal scroll-reveal-delay-1">
+                    <div class="glassmorphic px-4 py-2 header-badge">
+                        <span class="rs3-accent text-xs font-bold tracking-widest">🔥 LEGENDÄRER FÜNFZYLINDER</span>
+                    </div>
+                </div>
+
+                <h1 class="leading-tight scroll-reveal scroll-reveal-delay-2 tracking-tighter">
+                    <span class="block text-2xl md:text-3xl font-black">Audi</span>
+                    <span class="rs3-accent-gradient block text-3xl md:text-4xl font-black">RS3</span>
+                    <span class="block text-xl md:text-2xl opacity-90 font-black">Sportback 2011</span>
+                </h1>
+
+                <p class="opacity-85 leading-relaxed scroll-reveal scroll-reveal-delay-3 max-w-md text-sm">
+                    Der <span class="font-bold">erste RS3 Sportback</span> mit dem ikonischen
+                    <span class="rs3-accent font-bold">2.5 TFSI Fünfzylinder-Turbomotor</span>.
+                    <span class="text-red-400 font-semibold">340 PS</span> pure Emotion.
+                </p>
+
+                <div class="flex flex-wrap gap-3 scroll-reveal scroll-reveal-delay-4">
+                    <a href="#gallery" class="btn-premium btn-primary">📸 Galerie</a>
+                    <a href="#video" class="btn-premium btn-secondary">▶ Video</a>
+                </div>
+
+                <div class="grid grid-cols-3 gap-4 pt-4 scroll-reveal scroll-reveal-delay-5">
+                    <div class="group glassmorphic p-4 rounded-xl text-center">
+                        <div class="stat-number">340</div>
+                        <div class="text-gray-400 text-xs font-semibold tracking-wider mt-1">PS</div>
+                        <div class="h-0.5 w-0 bg-gradient-to-r from-red-600 to-transparent group-hover:w-full transition-all duration-500 mt-2 rounded-full"></div>
+                    </div>
+                    <div class="group glassmorphic p-4 rounded-xl text-center">
+                        <div class="stat-number">4,2</div>
+                        <div class="text-gray-400 text-xs font-semibold tracking-wider mt-1">0-100 s</div>
+                        <div class="h-0.5 w-0 bg-gradient-to-r from-red-600 to-transparent group-hover:w-full transition-all duration-500 mt-2 rounded-full"></div>
+                    </div>
+                    <div class="group glassmorphic p-4 rounded-xl text-center">
+                        <div class="stat-number">250</div>
+                        <div class="text-gray-400 text-xs font-semibold tracking-wider mt-1">km/h</div>
+                        <div class="h-0.5 w-0 bg-gradient-to-r from-red-600 to-transparent group-hover:w-full transition-all duration-500 mt-2 rounded-full"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-reveal-right hidden md:block">
+                <div class="relative">
+                    <div class="absolute inset-0 bg-gradient-to-t from-red-700/20 via-transparent to-transparent rounded-2xl blur-2xl"></div>
+                    <img src="bilder/rs3-hero.jpg"
+                         alt="Audi RS3 Sportback 2011"
+                         class="relative z-10 w-full rounded-2xl shadow-2xl border border-red-700/20"
+                         onerror="this.src='https://i.ibb.co/dgXCkTs/12.jpg'">
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-16 scroll-indicator">
+            <svg class="w-6 h-6 mx-auto opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+            </svg>
+            <p class="text-gray-500 text-xs mt-2 tracking-wider">Scrolle nach unten</p>
+        </div>
+    </div>
+</section>
+
+<!-- Gallery -->
+<section id="gallery" class="py-20 section-dark relative parallax">
+    <img src="https://images.unsplash.com/photo-1494976866556-6812c9d1c72e?w=1200&h=600&fit=crop"
+         alt="bg" class="parallax-bg" style="opacity:0.1;">
+
+    <div class="max-w-6xl mx-auto px-4 relative z-10">
+        <div class="text-center mb-14 scroll-reveal">
+            <p class="rs3-accent text-xs font-bold tracking-widest mb-2">VISUAL EXPERIENCE</p>
+            <h2 class="text-3xl md:text-5xl font-black mb-4 tracking-tighter">
+                Bild<span class="rs3-accent">galerie</span>
+            </h2>
+            <p class="opacity-70 text-sm max-w-xl mx-auto">
+                Entdecken Sie jeden Winkel des legendären RS3 Sportback - Klick auf ein Foto zum Zoomen
+            </p>
+        </div>
+
+        <!-- GALLERY IMAGES -->
+        <div class="image-gallery grid md:grid-cols-2 lg:grid-cols-3 gap-5" id="galleryGrid">
+
+            <!-- Seite 1 -->
+            <div class="gallery-page active" data-page="1">
+                <div class="gallery-item h-64 glassmorphic p-1" data-image="bilder/01.jpg" data-alt="RS3 Foto 1">
+                    <img src="bilder/01.jpg" alt="RS3 Foto 1"
+                         onerror="this.src='https://s1.cdn.autoevolution.com/images/gallery/AUDIRS3Sportback-4360_35.jpg'">
+                    <div class="gallery-item-number">01</div>
+                </div>
+                <div class="gallery-item h-64 glassmorphic p-1" data-image="bilder/02.jpg" data-alt="RS3 Foto 2">
+                    <img src="bilder/02.jpg" alt="RS3 Foto 2"
+                         onerror="this.src='https://i.ibb.co/dgXCkTs/12.jpg'">
+                    <div class="gallery-item-number">02</div>
+                </div>
+                <div class="gallery-item h-64 glassmorphic p-1" data-image="bilder/03.jpg" data-alt="RS3 Foto 3">
+                    <img src="bilder/03.jpg" alt="RS3 Foto 3"
+                         onerror="this.src='https://c7.alamy.com/zooms/9/9f60a24287d447ac8af9a95fc73ccd50/kxad1g.jpg'">
+                    <div class="gallery-item-number">03</div>
+                </div>
+                <div class="gallery-item h-64 glassmorphic p-1" data-image="bilder/06.jpg" data-alt="RS3 Foto 6">
+                    <img src="bilder/06.jpg" alt="RS3 Foto 6"
+                         onerror="this.src='https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=600&h=400&fit=crop'">
+                    <div class="gallery-item-number">04</div>
+                </div>
+                <div class="gallery-item h-64 glassmorphic p-1" data-image="bilder/07.jpg" data-alt="RS3 Foto 7">
+                    <img src="bilder/07.jpg" alt="RS3 Foto 7"
+                         onerror="this.src='https://images.unsplash.com/photo-1494976866556-6812c9d1c72e?w=600&h=400&fit=crop'">
+                    <div class="gallery-item-number">05</div>
+                </div>
+                <div class="gallery-item h-64 glassmorphic p-1" data-image="bilder/08.jpg" data-alt="RS3 Foto 8">
+                    <img src="bilder/08.jpg" alt="RS3 Foto 8"
+                         onerror="this.src='https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=600&h=400&fit=crop'">
+                    <div class="gallery-item-number">06</div>
+                </div>
+            </div>
+
+            <!-- Seite 2 -->
+            <div class="gallery-page" data-page="2">
+                <div class="gallery-item h-64 glassmorphic p-1" data-image="bilder/09.jpg" data-alt="RS3 Foto 9">
+                    <img src="bilder/09.jpg" alt="RS3 Foto 9"
+                         onerror="this.src='https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe3e?w=600&h=400&fit=crop'">
+                    <div class="gallery-item-number">07</div>
+                </div>
+                <div class="gallery-item h-64 glassmorphic p-1" data-image="bilder/10.jpg" data-alt="RS3 Foto 10">
+                    <img src="bilder/10.jpg" alt="RS3 Foto 10"
+                         onerror="this.src='https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=600&h=400&fit=crop'">
+                    <div class="gallery-item-number">08</div>
+                </div>
+                <div class="gallery-item h-64 glassmorphic p-1" data-image="bilder/11.jpg" data-alt="RS3 Foto 11">
+                    <img src="bilder/11.jpg" alt="RS3 Foto 11"
+                         onerror="this.src='https://images.unsplash.com/photo-1494976866556-6812c9d1c72e?w=600&h=400&fit=crop'">
+                    <div class="gallery-item-number">09</div>
+                </div>
+                <div class="gallery-item h-64 glassmorphic p-1" data-image="bilder/12.jpg" data-alt="RS3 Foto 12">
+                    <img src="bilder/12.jpg" alt="RS3 Foto 12"
+                         onerror="this.src='https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe3e?w=600&h=400&fit=crop'">
+                    <div class="gallery-item-number">10</div>
+                </div>
+                <div class="gallery-item h-64 glassmorphic p-1" data-image="bilder/13.jpg" data-alt="RS3 Foto 13">
+                    <img src="bilder/13.jpg" alt="RS3 Foto 13"
+                         onerror="this.src='https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=600&h=400&fit=crop'">
+                    <div class="gallery-item-number">11</div>
+                </div>
+                <div class="gallery-item h-64 glassmorphic p-1" data-image="bilder/14.jpg" data-alt="RS3 Foto 14">
+                    <img src="bilder/14.jpg" alt="RS3 Foto 14"
+                         onerror="this.src='https://images.unsplash.com/photo-1494976866556-6812c9d1c72e?w=600&h=400&fit=crop'">
+                    <div class="gallery-item-number">12</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="gallery-pagination">
+            <button class="gallery-page-btn" id="galleryPrev" disabled>← Zurück</button>
+            <div class="flex gap-2 items-center" id="galleryDots">
+                <div class="gallery-dot active" data-page="1"></div>
+                <div class="gallery-dot" data-page="2"></div>
+            </div>
+            <button class="gallery-page-btn" id="galleryNext">Weiter →</button>
+        </div>
+        <div class="text-center mt-3">
+            <span class="text-gray-500 text-xs" id="galleryPageInfo">Seite 1 von 2</span>
+        </div>
+    </div>
+</section>
+
+<!-- Modal Zoom -->
+<div class="modal-zoom" id="modalZoom">
+    <div class="modal-zoom-content">
+        <button class="modal-zoom-close" id="modalClose">&times;</button>
+        <img id="modalImage" src="" alt="Zoomed Image">
+    </div>
+    <div class="modal-zoom-info" id="modalInfo">Foto</div>
+</div>
+
+<!-- Specs -->
+<section id="specs" class="py-20 section-dark relative overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 relative z-10">
+        <div class="text-center mb-14 scroll-reveal">
+            <p class="rs3-accent text-xs font-bold tracking-widest mb-2">PURE PERFORMANCE</p>
+            <h2 class="text-3xl md:text-5xl font-black mb-4 tracking-tighter">
+                Technische <span class="rs3-accent">Daten</span>
+            </h2>
+        </div>
+
+        <div class="specs-grid">
+            <div class="spec-card glassmorphic border border-white/10 rounded-xl p-6 text-center scroll-reveal scroll-reveal-scale">
+                <div class="w-14 h-14 mx-auto mb-4 bg-gradient-to-br from-red-600 to-red-900 rounded-xl flex items-center justify-center">
+                    <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                </div>
+                <div class="text-4xl font-black rs3-accent mb-2">340</div>
+                <div class="font-bold text-sm mb-1">PS (250 kW)</div>
+                <div class="opacity-60 text-xs">bei 6.500 U/min</div>
+            </div>
+
+            <div class="spec-card glassmorphic border border-white/10 rounded-xl p-6 text-center scroll-reveal scroll-reveal-scale scroll-reveal-delay-1">
+                <div class="w-14 h-14 mx-auto mb-4 bg-gradient-to-br from-red-600 to-red-900 rounded-xl flex items-center justify-center">
+                    <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <div class="text-4xl font-black rs3-accent mb-2">4,2</div>
+                <div class="font-bold text-sm mb-1">0-100 km/h</div>
+                <div class="opacity-60 text-xs">Beschleunigung</div>
+            </div>
+
+            <div class="spec-card glassmorphic border border-white/10 rounded-xl p-6 text-center scroll-reveal scroll-reveal-scale scroll-reveal-delay-2">
+                <div class="w-14 h-14 mx-auto mb-4 bg-gradient-to-br from-red-600 to-red-900 rounded-xl flex items-center justify-center">
+                    <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                    </svg>
+                </div>
+                <div class="text-4xl font-black rs3-accent mb-2">250</div>
+                <div class="font-bold text-sm mb-1">km/h</div>
+                <div class="opacity-60 text-xs">Höchstgeschwindigkeit</div>
+            </div>
+
+            <div class="spec-card glassmorphic border border-white/10 rounded-xl p-6 text-center scroll-reveal scroll-reveal-scale scroll-reveal-delay-3">
+                <div class="w-14 h-14 mx-auto mb-4 bg-gradient-to-br from-red-600 to-red-900 rounded-xl flex items-center justify-center">
+                    <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+                    </svg>
+                </div>
+                <div class="text-4xl font-black rs3-accent mb-2">2.5L</div>
+                <div class="font-bold text-sm mb-1">TFSI</div>
+                <div class="opacity-60 text-xs">5-Zylinder Turbo</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Video -->
+<section id="video" class="py-20 section-dark relative overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 relative z-10">
+        <div class="text-center mb-14 scroll-reveal">
+            <p class="rs3-accent text-xs font-bold tracking-widest mb-2">AUDIO EXPERIENCE</p>
+            <h2 class="text-3xl md:text-5xl font-black mb-4 tracking-tighter">
+                RS3 im <span class="rs3-accent">Action</span>
+            </h2>
+            <p class="opacity-70 text-sm max-w-xl mx-auto">Erleben Sie den legendären Fünfzylinder-Sound</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto scroll-reveal scroll-reveal-scale">
+            <a href="https://www.youtube.com/watch?v=0m_-XGnco9s" target="_blank" rel="noopener noreferrer"
+               class="block relative w-full rounded-2xl overflow-hidden glassmorphic p-1 group"
+               style="animation: glow 3s ease-in-out infinite;">
+                <div class="video-badge">▶ Watch Now</div>
+                <img src="https://i.ytimg.com/vi/0m_-XGnco9s/maxresdefault.jpg"
+                     alt="RS3 Video" class="w-full h-auto object-cover rounded-xl">
+                <div class="video-overlay">
+                    <div class="play-button">
+                        <svg class="w-9 h-9 text-white ml-1.5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                    </div>
+                </div>
+            </a>
+
+            <div class="text-center mt-8">
+                <a href="https://www.youtube.com/watch?v=0m_-XGnco9s" target="_blank" rel="noopener noreferrer"
+                   class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-red-600 to-red-800 text-white font-bold rounded-full hover:shadow-lg hover:shadow-red-600/40 transition-all duration-300 hover:scale-105 text-sm tracking-wide">
+                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                    </svg>
+                    Zum YouTube Video
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Timeline -->
+<section id="timeline" class="py-20 section-dark relative overflow-hidden parallax">
+    <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe3e?w=1200&h=600&fit=crop"
+         alt="bg" class="parallax-bg" style="opacity:0.07;">
+
+    <div class="max-w-6xl mx-auto px-4 relative z-10">
+        <div class="text-center mb-14 scroll-reveal">
+            <p class="rs3-accent text-xs font-bold tracking-widest mb-2">EINE LEGENDE ENTSTEHT</p>
+            <h2 class="text-3xl md:text-5xl font-black mb-4 tracking-tighter">
+                Geschichte des <span class="rs3-accent">5-Zylinders</span>
+            </h2>
+            <p class="opacity-70 text-sm max-w-xl mx-auto">Vom Rallyesport bis zur modernen Hochleistung</p>
+        </div>
+
+        <div class="timeline-container">
+            <div class="timeline-line"></div>
+            <div class="timeline-items space-y-0">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">1980er</div>
+                        <h3 class="timeline-title">Rallye-Legende</h3>
+                        <p class="timeline-description">Der Fünfzylinder-Motor wird zur Waffe im Rallye-Sport. Audi gewinnt mehrere Meisterschaften mit unverwechselbarem Sound.</p>
+                        <div class="timeline-badge">🏆 Rallye-Sieger</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">1990er</div>
+                        <h3 class="timeline-title">Erstes Alltagsauto</h3>
+                        <p class="timeline-description">Der 5-Zylinder findet Einzug in Serienfahrzeuge. Kultiger Motor für den Alltag.</p>
+                        <div class="timeline-badge">🚗 Serienauto</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2000er</div>
+                        <h3 class="timeline-title">TFSI Revolution</h3>
+                        <p class="timeline-description">Der 2.5 TFSI wird geboren - das spätere Herz des RS3.</p>
+                        <div class="timeline-badge">⚡ TFSI Tech</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2011</div>
+                        <h3 class="timeline-title">RS3 Sportback Debut</h3>
+                        <p class="timeline-description">340 PS und legendärer Sound revolutionieren die Kompaktklasse. Ein Meilenstein.</p>
+                        <div class="timeline-badge">🌟 Legende</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2012–2015</div>
+                        <h3 class="timeline-title">Goldene Jahre (8P)</h3>
+                        <p class="timeline-description">Weltweite Anerkennung. Der RS3 wird zum Liebling der Performance-Fans.</p>
+                        <div class="timeline-badge">👑 Favorit</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2015–2020</div>
+                        <h3 class="timeline-title">Zweite Generation (8V)</h3>
+                        <p class="timeline-description">400 PS, aggressiveres Design und mehr Raffinesse. Das Erbe wird fortgesetzt.</p>
+                        <div class="timeline-badge">🔥 400 PS</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2020–2024</div>
+                        <h3 class="timeline-title">Dritte Generation (8Y)</h3>
+                        <p class="timeline-description">407 PS mit Mild-Hybrid-Technologie. Modernste Systeme kombiniert mit Hochleistung.</p>
+                        <div class="timeline-badge">⚡ 407 PS + Hybrid</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2024+</div>
+                        <h3 class="timeline-title">Das Vermächtnis</h3>
+                        <p class="timeline-description">Von Rallye bis RS - Der 5-Zylinder bleibt unsterblich.</p>
+                        <div class="timeline-badge">💎 Unsterblich</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Generations -->
+<section id="generations" class="py-20 section-dark relative overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 relative z-10">
+        <div class="text-center mb-14 scroll-reveal">
+            <p class="rs3-accent text-xs font-bold tracking-widest mb-2">EVOLUTION DER LEGENDE</p>
+            <h2 class="text-3xl md:text-5xl font-black mb-4 tracking-tighter">
+                Generationen<span class="rs3-accent">vergleich</span>
+            </h2>
+            <p class="opacity-70 text-sm max-w-xl mx-auto">Von der 8P über 8V bis zur modernen 8Y</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+            <!-- 8P -->
+            <div class="generation-card scroll-reveal scroll-reveal-scale glassmorphic rounded-2xl overflow-hidden border border-white/10">
+                <div class="generation-card-image-wrapper">
+                    <img src="bilder/rs3-8p.jpg" alt="RS3 8P"
+                         class="generation-card-image"
+                         onload="this.parentElement.style.background='none'"
+                         onerror="this.src='https://i.ibb.co/dgXCkTs/12.jpg'">
+                </div>
+                <div class="generation-card-content">
+                    <div class="mb-3">
+                        <span class="gen-badge">8P (2011–2015)</span>
+                        <p class="text-xs opacity-60 mt-1">Erste Generation</p>
+                    </div>
+                    <h3 class="text-base font-bold mb-2">Die Legende beginnt</h3>
+                    <p class="opacity-65 text-xs leading-relaxed mb-3">
+                        340 PS, Carbon-Kotflügel und legendärer 5-Zylinder Sound. Das Original.
+                    </p>
+                    <div class="generation-specs">
+                        <div class="generation-spec-item"><div class="generation-spec-value">340</div><div class="generation-spec-label">PS</div></div>
+                        <div class="generation-spec-item"><div class="generation-spec-value">4,2</div><div class="generation-spec-label">0-100</div></div>
+                        <div class="generation-spec-item"><div class="generation-spec-value">450</div><div class="generation-spec-label">Nm</div></div>
+                        <div class="generation-spec-item"><div class="generation-spec-value">250</div><div class="generation-spec-label">km/h</div></div>
+                    </div>
+                    <div class="gen-highlights">
+                        <div class="gen-highlights-title">Highlights</div>
+                        <div class="gen-highlights-list">
+                            <div class="gen-highlight-item">Original 5-Zyl.</div>
+                            <div class="gen-highlight-item">Carbon Kotfl.</div>
+                            <div class="gen-highlight-item">Ikonisch</div>
+                            <div class="gen-highlight-item">Agil</div>
+                            <div class="gen-highlight-item">Kult-Sound</div>
+                            <div class="gen-highlight-item">Rallyeerbe</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8V -->
+            <div class="generation-card scroll-reveal scroll-reveal-scale scroll-reveal-delay-1 glassmorphic rounded-2xl overflow-hidden border border-white/10">
+                <div class="generation-card-image-wrapper">
+                    <img src="bilder/rs3-8v.jpg" alt="RS3 8V"
+                         class="generation-card-image"
+                         onload="this.parentElement.style.background='none'"
+                         onerror="this.src='https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=600&h=400&fit=crop'">
+                </div>
+                <div class="generation-card-content">
+                    <div class="mb-3">
+                        <span class="gen-badge">8V (2015–2020)</span>
+                        <p class="text-xs opacity-60 mt-1">Zweite Generation</p>
+                    </div>
+                    <h3 class="text-base font-bold mb-2">Evolution der Kraft</h3>
+                    <p class="opacity-65 text-xs leading-relaxed mb-3">
+                        400 PS, aggressiveres Design, Virtual Cockpit. Größer und stärker.
+                    </p>
+                    <div class="generation-specs">
+                        <div class="generation-spec-item"><div class="generation-spec-value">400</div><div class="generation-spec-label">PS</div></div>
+                        <div class="generation-spec-item"><div class="generation-spec-value">3,9</div><div class="generation-spec-label">0-100</div></div>
+                        <div class="generation-spec-item"><div class="generation-spec-value">480</div><div class="generation-spec-label">Nm</div></div>
+                        <div class="generation-spec-item"><div class="generation-spec-value">280</div><div class="generation-spec-label">km/h</div></div>
+                    </div>
+                    <div class="gen-highlights">
+                        <div class="gen-highlights-title">Highlights</div>
+                        <div class="gen-highlights-list">
+                            <div class="gen-highlight-item">400 PS</div>
+                            <div class="gen-highlight-item">Aggressiv</div>
+                            <div class="gen-highlight-item">Qualität</div>
+                            <div class="gen-highlight-item">Virtual Cockpit</div>
+                            <div class="gen-highlight-item">Fahrwerk</div>
+                            <div class="gen-highlight-item">Quattro</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8Y -->
+            <div class="generation-card scroll-reveal scroll-reveal-scale scroll-reveal-delay-2 glassmorphic rounded-2xl overflow-hidden border border-white/10">
+                <div class="generation-card-image-wrapper">
+                    <img src="bilder/rs3-8y.jpg" alt="RS3 8Y"
+                         class="generation-card-image"
+                         onload="this.parentElement.style.background='none'"
+                         onerror="this.src='https://images.unsplash.com/photo-1494976866556-6812c9d1c72e?w=600&h=400&fit=crop'">
+                </div>
+                <div class="generation-card-content">
+                    <div class="mb-3">
+                        <span class="gen-badge">8Y (2020–2024)</span>
+                        <p class="text-xs opacity-60 mt-1">Dritte Generation</p>
+                    </div>
+                    <h3 class="text-base font-bold mb-2">Zukunftstechnologie</h3>
+                    <p class="opacity-65 text-xs leading-relaxed mb-3">
+                        407 PS mit Mild-Hybrid. Modernste Technik trifft Hochleistung.
+                    </p>
+                    <div class="generation-specs">
+                        <div class="generation-spec-item"><div class="generation-spec-value">407</div><div class="generation-spec-label">PS</div></div>
+                        <div class="generation-spec-item"><div class="generation-spec-value">3,8</div><div class="generation-spec-label">0-100</div></div>
+                        <div class="generation-spec-item"><div class="generation-spec-value">480</div><div class="generation-spec-label">Nm</div></div>
+                        <div class="generation-spec-item"><div class="generation-spec-value">280</div><div class="generation-spec-label">km/h</div></div>
+                    </div>
+                    <div class="gen-highlights">
+                        <div class="gen-highlights-title">Highlights</div>
+                        <div class="gen-highlights-list">
+                            <div class="gen-highlight-item">Hybrid</div>
+                            <div class="gen-highlight-item">407 PS</div>
+                            <div class="gen-highlight-item">Moderne Tech</div>
+                            <div class="gen-highlight-item">MMI Touch</div>
+                            <div class="gen-highlight-item">LED Matrix</div>
+                            <div class="gen-highlight-item">Pro Sport</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features -->
+<section id="features" class="py-20 section-dark relative overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 relative z-10">
+        <div class="text-center mb-14 scroll-reveal">
+            <p class="rs3-accent text-xs font-bold tracking-widest mb-2">HIGHLIGHTS</p>
+            <h2 class="text-3xl md:text-5xl font-black mb-4 tracking-tighter">
+                Besonder<span class="rs3-accent">heiten</span>
+            </h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="feature-card text-center p-8 glassmorphic rounded-xl scroll-reveal scroll-reveal-scale">
+                <div class="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-red-600 to-red-900 rounded-xl flex items-center justify-center">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-black mb-3">Erstveröffentlichung 2011</h3>
+                <p class="opacity-70 text-sm leading-relaxed">Ein Meilenstein der Automobilgeschichte. Der erste RS3 Sportback.</p>
+            </div>
+
+            <div class="feature-card text-center p-8 glassmorphic rounded-xl scroll-reveal scroll-reveal-scale scroll-reveal-delay-2">
+                <div class="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-red-600 to-red-900 rounded-xl flex items-center justify-center">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-black mb-3">Legendärer 5-Zylinder</h3>
+                <p class="opacity-70 text-sm leading-relaxed">Der 2.5 TFSI mit unverwechselbarem Sound - Hommage an Audis Rallyeerbe.</p>
+            </div>
+
+            <div class="feature-card text-center p-8 glassmorphic rounded-xl scroll-reveal scroll-reveal-scale scroll-reveal-delay-1">
+                <div class="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-red-600 to-red-900 rounded-xl flex items-center justify-center">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-black mb-3">CFRP Kotflügel</h3>
+                <p class="opacity-70 text-sm leading-relaxed">Verbreiterte Kotflügel aus Kohlefaser - Sportlichkeit meets Leichtbau.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-10 section-dark border-t border-red-700/15">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="flex flex-col md:flex-row items-center justify-between mb-6">
+            <div class="flex items-center space-x-3 mb-4 md:mb-0">
+                <svg class="w-8 h-8 rs3-accent" viewBox="0 0 100 100">
+                    <circle cx="20" cy="50" r="15" stroke="currentColor" stroke-width="3" fill="none"/>
+                    <circle cx="40" cy="50" r="15" stroke="currentColor" stroke-width="3" fill="none"/>
+                    <circle cx="60" cy="50" r="15" stroke="currentColor" stroke-width="3" fill="none"/>
+                    <circle cx="80" cy="50" r="15" stroke="currentColor" stroke-width="3" fill="none"/>
+                </svg>
+                <div>
+                    <p class="font-bold text-sm">Audi RS3 Sportback Evolution</p>
+                    <p class="opacity-60 text-xs">Von 8P bis 8Y</p>
+                </div>
+            </div>
+            <div class="text-right">
+                <p class="opacity-60 text-xs">Bilder: © AUDI AG & Unsplash</p>
+                <p class="opacity-40 text-xs">Inoffizielles Fan-Projekt</p>
+            </div>
+        </div>
+        <div class="border-t border-red-700/15 pt-6 text-center">
+            <p class="opacity-60 text-xs">© 2024 RS3 Tribute | Made with <span class="rs3-accent">❤</span> by Auto Enthusiasts</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+// ── Mouse Gradient ─────────────────────────────────────────
+const mg1=document.getElementById('mg1'), mg2=document.getElementById('mg2'), mg3=document.getElementById('mg3');
+let mx=0,my=0,x1=0,y1=0,x2=0,y2=0,x3=0,y3=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function loop(){
+    x1+=(mx-x1)*0.15; y1+=(my-y1)*0.15;
+    x2+=(mx-x2)*0.08; y2+=(my-y2)*0.08;
+    x3+=(mx-x3)*0.04; y3+=(my-y3)*0.04;
+    mg1.style.left=x1+'px'; mg1.style.top=y1+'px';
+    mg2.style.left=x2+'px'; mg2.style.top=y2+'px';
+    mg3.style.left=x3+'px'; mg3.style.top=y3+'px';
+    requestAnimationFrame(loop);
+})();
+
+// ── Theme Toggle ───────────────────────────────────────────
+const themeBtn=document.getElementById('themeToggle');
+const themeIcon=document.getElementById('themeIcon');
+const themeText=document.getElementById('themeText');
+const body=document.body;
+const saved=localStorage.getItem('theme')||'dark-mode';
+body.classList.add(saved);
+if(saved==='light-mode'){themeIcon.textContent='☀️';themeText.textContent='Light';}
+themeBtn.addEventListener('click',()=>{
+    body.classList.toggle('dark-mode');
+    body.classList.toggle('light-mode');
+    const t=body.classList.contains('light-mode')?'light-mode':'dark-mode';
+    localStorage.setItem('theme',t);
+    themeIcon.textContent=t==='light-mode'?'☀️':'🌙';
+    themeText.textContent=t==='light-mode'?'Light':'Dark';
+});
+
+// ── Parallax ───────────────────────────────────────────────
+const pBgs=document.querySelectorAll('.parallax-bg');
+window.addEventListener('scroll',()=>{
+    pBgs.forEach(el=>{
+        const d=window.pageYOffset-el.parentElement.offsetTop;
+        el.style.transform=`translateY(${d*0.35}px)`;
+    });
+});
+
+// ── Section Progress ───────────────────────────────────────
+const pItems=document.querySelectorAll('.section-progress-item');
+const sIds=['home','gallery','specs','video','timeline','generations'];
+window.addEventListener('scroll',()=>{
+    let cur='home';
+    sIds.forEach(id=>{
+        const el=document.getElementById(id);
+        if(el&&window.pageYOffset>=el.offsetTop-200) cur=id;
+    });
+    pItems.forEach(item=>item.classList.toggle('active',item.dataset.section===cur));
+});
+pItems.forEach(item=>{
+    item.addEventListener('click',()=>{
+        document.getElementById(item.dataset.section)?.scrollIntoView({behavior:'smooth'});
+    });
+});
+
+// ── Navbar ─────────────────────────────────────────────────
+const navEl=document.querySelector('nav');
+window.addEventListener('scroll',()=>navEl.classList.toggle('scrolled',window.scrollY>40));
+
+// ── Smooth Links ───────────────────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{
+        if(!a.target){
+            e.preventDefault();
+            document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth',block:'start'});
+        }
+    });
+});
+
+// ── Scroll Reveal ──────────────────────────────────────────
+const rObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+        if(e.isIntersecting){e.target.classList.add('revealed');rObs.unobserve(e.target);}
+    });
+},{threshold:0.1,rootMargin:'0px 0px -80px 0px'});
+document.querySelectorAll('.scroll-reveal,.scroll-reveal-left,.scroll-reveal-right,.scroll-reveal-scale')
+    .forEach(el=>rObs.observe(el));
+
+// ── Counter ────────────────────────────────────────────────
+const cObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+        if(e.isIntersecting&&!e.target.classList.contains('animated')){
+            const isDecimal=e.target.textContent.includes(',');
+            const target=parseFloat(e.target.textContent.replace(',','.'));
+            let cur=0; const inc=target/(1200/16);
+            const t=setInterval(()=>{
+                cur+=inc;
+                if(cur>=target){
+                    e.target.textContent=isDecimal?target.toFixed(1).replace('.',','):Math.floor(target);
+                    clearInterval(t);
+                } else {
+                    e.target.textContent=isDecimal?cur.toFixed(1).replace('.',','):Math.floor(cur);
+                }
+            },16);
+            e.target.classList.add('animated');
+        }
+    });
+},{threshold:0.5});
+document.querySelectorAll('.stat-number').forEach(el=>cObs.observe(el));
+
+// ── Gallery Pagination ─────────────────────────────────────
+const pages=document.querySelectorAll('.gallery-page');
+const dots=document.querySelectorAll('.gallery-dot');
+const prevBtn=document.getElementById('galleryPrev');
+const nextBtn=document.getElementById('galleryNext');
+const pageInfo=document.getElementById('galleryPageInfo');
+const total=pages.length;
+let cur=1;
+
+function showPage(n){
+    pages.forEach(p=>p.classList.remove('active'));
+    dots.forEach(d=>d.classList.remove('active'));
+    pages[n-1].classList.add('active');
+    dots[n-1].classList.add('active');
+    cur=n;
+    pageInfo.textContent=`Seite ${n} von ${total}`;
+    prevBtn.disabled=n===1;
+    nextBtn.disabled=n===total;
+    document.getElementById('gallery').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+prevBtn.addEventListener('click',()=>{if(cur>1) showPage(cur-1);});
+nextBtn.addEventListener('click',()=>{if(cur<total) showPage(cur+1);});
+dots.forEach(d=>d.addEventListener('click',()=>showPage(parseInt(d.dataset.page))));
+showPage(1);
+
+// ── Gallery Image Zoom Modal ───────────────────────────────────
+const modal=document.getElementById('modalZoom');
+const modalImg=document.getElementById('modalImage');
+const modalClose=document.getElementById('modalClose');
+const modalInfo=document.getElementById('modalInfo');
+const galleryItems=document.querySelectorAll('.gallery-item');
+
+galleryItems.forEach((item,idx)=>{
+    item.addEventListener('click',()=>{
+        const imgSrc=item.dataset.image;
+        const altText=item.dataset.alt;
+        const num=idx+1;
+        
+        const img=new Image();
+        img.onload=()=>{
+            modalImg.src=img.src;
+            modal.classList.add('active');
+            document.body.style.overflow='hidden';
+        };
+        img.onerror=()=>{
+            modalImg.src=item.querySelector('img').src;
+            modal.classList.add('active');
+            document.body.style.overflow='hidden';
+        };
+        img.src=imgSrc;
+        
+        modalInfo.textContent=`Foto ${num}`;
+    });
+});
+
+function closeModal(){
+    modal.classList.remove('active');
+    document.body.style.overflow='auto';
+}
+
+modalClose.addEventListener('click',closeModal);
+modal.addEventListener('click',(e)=>{
+    if(e.target===modal) closeModal();
+});
+
+document.addEventListener('keydown',(e)=>{
+    if(e.key==='Escape') closeModal();
+});
+</script>
+</body>
+</html>
