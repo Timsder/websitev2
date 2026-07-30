@@ -1,0 +1,1940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Audi RS3 Sportback 2011</title>
+<meta name="description" content="Audi RS3 Sportback 2011 – Galerie, Technik, Video, Geschichte und Generationen." />
+<script>
+ (function () {
+ if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+ if (location.hash) {
+ try { history.replaceState(null, '', location.pathname + location.search); } catch(_) {}
+ }
+ function jumpTop() {
+ window.scrollTo(0, 0);
+ document.documentElement.scrollTop = 0;
+ if (document.body) document.body.scrollTop = 0;
+ }
+ jumpTop();
+ var lockUntil = Date.now() + 1800;
+ function lockLoop() {
+ jumpTop();
+ if (Date.now() < lockUntil) requestAnimationFrame(lockLoop);
+ }
+ document.addEventListener('DOMContentLoaded', lockLoop);
+ window.addEventListener('load', function () { lockUntil = Date.now() + 800; lockLoop(); });
+ window.addEventListener('pageshow', jumpTop);
+ })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Barlow:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config = {
+ theme: {
+ extend: {
+ fontFamily: {
+ heading: ["'Instrument Serif'", "serif"],
+ body: ["Barlow", "sans-serif"],
+ },
+ },
+ },
+ };
+</script>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script src="https://unpkg.com/framer-motion@11.11.17/dist/framer-motion.js"></script>
+<script>if (!window.Motion && window.FramerMotion) window.Motion = window.FramerMotion;
+ const _origErr = console.error;
+ console.error = function(...args){
+ if (typeof args[0] === 'string' && args[0].includes('unique "key"')) return;
+ _origErr.apply(console, args);
+ };
+</script>
+
+<style>
+ /* ── Reset & Base ── */
+ *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ html { scroll-behavior: smooth; }
+ html, body { background: #000; color: #fff; }
+ body { font-family: 'Barlow', sans-serif; -webkit-font-smoothing: antialiased; }
+
+ /* ── Liquid Glass ── */
+ .liquid-glass {
+ background: rgba(255,255,255,0.04);
+ backdrop-filter: blur(20px);
+ -webkit-backdrop-filter: blur(20px);
+ border: none;
+ box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
+ position: relative;
+ overflow: hidden;
+ }
+ .liquid-glass::before {
+ content: "";
+ position: absolute; inset: 0;
+ border-radius: inherit;
+ padding: 1.4px;
+ background: linear-gradient(180deg,
+ rgba(255,255,255,0.45) 0%,
+ rgba(255,255,255,0.15) 20%,
+ rgba(255,255,255,0) 40%,
+ rgba(255,255,255,0) 60%,
+ rgba(255,255,255,0.15) 80%,
+ rgba(255,255,255,0.45) 100%);
+ -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+ -webkit-mask-composite: xor;
+ mask-composite: exclude;
+ pointer-events: none;
+ }
+ .liquid-glass-strong {
+ background: rgba(255,255,255,0.06);
+ backdrop-filter: blur(50px);
+ -webkit-backdrop-filter: blur(50px);
+ border: none;
+ box-shadow: 4px 4px 4px rgba(0,0,0,0.1), inset 0 1px 1px rgba(255,255,255,0.15);
+ position: relative;
+ overflow: hidden;
+ }
+ .liquid-glass-strong::before {
+ content: "";
+ position: absolute; inset: 0;
+ border-radius: inherit;
+ padding: 1.4px;
+ background: linear-gradient(180deg,
+ rgba(255,255,255,0.5) 0%,
+ rgba(255,255,255,0.2) 20%,
+ rgba(255,255,255,0) 40%,
+ rgba(255,255,255,0) 60%,
+ rgba(255,255,255,0.2) 80%,
+ rgba(255,255,255,0.5) 100%);
+ -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+ -webkit-mask-composite: xor;
+ mask-composite: exclude;
+ pointer-events: none;
+ }
+
+ /* ── Accent ── */
+ .rs3-red { color: #dc2626; }
+ .rs3-red-glow { color: #dc2626; text-shadow: 0 0 20px rgba(220,38,38,0.5); }
+ .rs3-gradient-text {
+ background: linear-gradient(135deg, #ef4444, #dc2626, #b91c1c);
+ -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+ }
+
+ /* ── Section ── */
+ .aeon-section {
+ position: relative;
+ background: transparent;
+ overflow: hidden;
+ }
+ .aeon-section-alt {
+ position: relative;
+ background: transparent;
+ overflow: hidden;
+ }
+
+ /* ── Noise overlay for texture ── */
+ .aeon-section::after,
+ .aeon-section-alt::after {
+ content: '';
+ position: absolute; inset: 0;
+ background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+ pointer-events: none;
+ z-index: 0;
+ }
+
+ /* ── Ambient blobs ── */
+ .blob {
+ position: absolute;
+ border-radius: 50%;
+ filter: blur(120px);
+ pointer-events: none;
+ }
+ .blob-red { background: radial-gradient(circle, rgba(220,38,38,0.18) 0%, transparent 70%); }
+ .blob-dark-red { background: radial-gradient(circle, rgba(185,28,28,0.12) 0%, transparent 70%); }
+
+ /* ── Section label ── */
+ .section-label {
+ font-family: 'Barlow', sans-serif;
+ font-size: 0.75rem;
+ font-weight: 500;
+ color: rgba(255,255,255,0.5);
+ letter-spacing: 0.05em;
+ margin-bottom: 1.5rem;
+ }
+
+ /* ── Heading ── */
+ .aeon-heading {
+ font-family: 'Instrument Serif', serif;
+ font-style: italic;
+ line-height: 0.92;
+ letter-spacing: -0.03em;
+ color: #fff;
+ }
+
+ /* ── Body text ── */
+ .aeon-body {
+ font-family: 'Barlow', sans-serif;
+ font-weight: 300;
+ color: rgba(255,255,255,0.75);
+ line-height: 1.6;
+ }
+
+ /* ── Cards ── */
+ .aeon-card {
+ border-radius: 1.25rem;
+ padding: 1.5rem;
+ transition: transform 0.3s ease, box-shadow 0.3s ease;
+ position: relative;
+ z-index: 1;
+ }
+ .aeon-card:hover {
+ transform: translateY(-4px);
+ }
+
+ /* ── Stat card ── */
+ .stat-chip {
+ font-family: 'Instrument Serif', serif;
+ font-style: italic;
+ font-size: 2.5rem;
+ line-height: 1;
+ color: #fff;
+ letter-spacing: -0.03em;
+ }
+ .stat-label {
+ font-family: 'Barlow', sans-serif;
+ font-size: 0.7rem;
+ font-weight: 500;
+ color: rgba(255,255,255,0.45);
+ text-transform: uppercase;
+ letter-spacing: 0.08em;
+ margin-top: 0.35rem;
+ }
+
+ /* ── Tag pill ── */
+ .aeon-tag {
+ display: inline-block;
+ font-family: 'Barlow', sans-serif;
+ font-size: 0.7rem;
+ font-weight: 500;
+ color: rgba(255,255,255,0.8);
+ padding: 0.3rem 0.75rem;
+ border-radius: 9999px;
+ }
+
+ /* ── Button ── */
+ .aeon-btn {
+ display: inline-flex;
+ align-items: center;
+ gap: 0.4rem;
+ font-family: 'Barlow', sans-serif;
+ font-weight: 600;
+ font-size: 0.82rem;
+ letter-spacing: 0.04em;
+ padding: 0.65rem 1.5rem;
+ border-radius: 9999px;
+ transition: all 0.3s ease;
+ cursor: pointer;
+ border: none;
+ text-decoration: none;
+ }
+ .aeon-btn-primary {
+ background: #fff;
+ color: #000;
+ }
+ .aeon-btn-primary:hover {
+ background: rgba(255,255,255,0.9);
+ transform: translateY(-2px);
+ box-shadow: 0 8px 30px rgba(255,255,255,0.15);
+ }
+ .aeon-btn-ghost {
+ background: transparent;
+ color: #fff;
+ }
+ .aeon-btn-ghost:hover {
+ background: rgba(255,255,255,0.06);
+ transform: translateY(-2px);
+ }
+ .aeon-btn-red {
+ background: linear-gradient(135deg, #dc2626, #b91c1c);
+ color: #fff;
+ box-shadow: 0 8px 30px rgba(220,38,38,0.25);
+ }
+ .aeon-btn-red:hover {
+ transform: translateY(-2px);
+ box-shadow: 0 12px 40px rgba(220,38,38,0.4);
+ }
+
+ /* ── Scrollbar ── */
+ ::-webkit-scrollbar { width: 4px; }
+ ::-webkit-scrollbar-track { background: #000; }
+ ::-webkit-scrollbar-thumb { background: rgba(220,38,38,0.4); border-radius: 2px; }
+
+ /* ── Progress sidebar ── */
+ .progress-sidebar {
+ position: fixed;
+ right: 1.5rem;
+ top: 50%;
+ transform: translateY(-50%);
+ z-index: 50;
+ display: flex;
+ flex-direction: column;
+ gap: 1.25rem;
+ align-items: flex-end;
+ }
+ .progress-item {
+ display: flex;
+ align-items: center;
+ gap: 0.6rem;
+ cursor: pointer;
+ opacity: 0.35;
+ transition: opacity 0.3s ease, transform 0.3s ease;
+ }
+ .progress-item.active { opacity: 1; transform: translateX(-4px); }
+ .progress-label {
+ font-family: 'Barlow', sans-serif;
+ font-size: 0.6rem;
+ font-weight: 600;
+ color: rgba(255,255,255,0.6);
+ text-transform: uppercase;
+ letter-spacing: 0.08em;
+ white-space: nowrap;
+ }
+ .progress-item.active .progress-label { color: #fff; }
+ .progress-dot {
+ width: 6px; height: 6px;
+ border-radius: 50%;
+ background: rgba(255,255,255,0.3);
+ border: 1px solid rgba(255,255,255,0.4);
+ transition: all 0.3s ease;
+ flex-shrink: 0;
+ }
+ .progress-item.active .progress-dot {
+ width: 8px; height: 8px;
+ background: #fff;
+ box-shadow: 0 0 10px rgba(255,255,255,0.6);
+ }
+ @media (max-width: 768px) { .progress-sidebar { display: none; } }
+
+ /* ── Nav ── */
+ .aeon-nav {
+ position: fixed;
+ top: 1rem;
+ left: 50%;
+ transform: translateX(-50%);
+ z-index: 60;
+ display: flex;
+ align-items: center;
+ gap: 0.25rem;
+ padding: 0.4rem 0.5rem;
+ border-radius: 9999px;
+ white-space: nowrap;
+ }
+ .aeon-nav a {
+ font-family: 'Barlow', sans-serif;
+ font-size: 0.8rem;
+ font-weight: 500;
+ color: rgba(255,255,255,0.8);
+ padding: 0.4rem 0.85rem;
+ border-radius: 9999px;
+ text-decoration: none;
+ transition: all 0.2s ease;
+ }
+ .aeon-nav a:hover { color: #fff; background: rgba(255,255,255,0.08); }
+ @media (max-width: 768px) { .aeon-nav { display: none; } }
+
+ /* ── Scroll reveal ── */
+ .reveal {
+ opacity: 0;
+ transform: translateY(40px);
+ transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+ }
+ .reveal.from-left { transform: translateX(-50px); }
+ .reveal.from-right { transform: translateX(50px); }
+ .reveal.from-scale { transform: scale(0.92); }
+ .reveal.visible { opacity: 1; transform: none; }
+ .reveal-d1 { transition-delay: 0.1s; }
+ .reveal-d2 { transition-delay: 0.2s; }
+ .reveal-d3 { transition-delay: 0.3s; }
+ .reveal-d4 { transition-delay: 0.4s; }
+ .reveal-d5 { transition-delay: 0.5s; }
+
+ /* ── Gallery ── */
+ .gallery-item {
+ position: relative;
+ border-radius: 1rem;
+ overflow: hidden;
+ cursor: zoom-in;
+ }
+ .gallery-item img {
+ width: 100%; height: 100%;
+ object-fit: cover;
+ display: block;
+ transition: transform 0.5s ease, filter 0.3s ease;
+ }
+ .gallery-item:hover img { transform: scale(1.04); filter: brightness(1.08); }
+ .gallery-item-overlay {
+ position: absolute; inset: 0;
+ background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 50%);
+ opacity: 0;
+ transition: opacity 0.3s ease;
+ display: flex; align-items: flex-end; justify-content: flex-start;
+ padding: 1rem;
+ }
+ .gallery-item:hover .gallery-item-overlay { opacity: 1; }
+ .gallery-num {
+ font-family: 'Instrument Serif', serif;
+ font-style: italic;
+ font-size: 2rem;
+ color: rgba(255,255,255,0.7);
+ line-height: 1;
+ }
+
+ /* Gallery pages */
+ .gallery-page { display: none; }
+ .gallery-page.active { display: contents; }
+
+ /* ── Modal ── */
+ .modal-backdrop {
+ display: none;
+ position: fixed; inset: 0;
+ background: rgba(0,0,0,0.96);
+ z-index: 1000;
+ align-items: center;
+ justify-content: center;
+ animation: fadeIn 0.25s ease;
+ }
+ .modal-backdrop.active { display: flex; }
+ .modal-img {
+ max-width: calc(100vw - 4rem);
+ max-height: calc(100vh - 8rem);
+ object-fit: contain;
+ border-radius: 0.75rem;
+ animation: scaleIn 0.3s ease;
+ }
+ .modal-close-btn {
+ position: fixed; top: 1.5rem; right: 1.5rem;
+ width: 2.5rem; height: 2.5rem;
+ border-radius: 50%;
+ font-size: 1.25rem;
+ color: #fff;
+ cursor: pointer;
+ display: flex; align-items: center; justify-content: center;
+ border: none;
+ transition: all 0.2s ease;
+ z-index: 1001;
+ }
+ .modal-close-btn:hover { transform: scale(1.15); }
+ .modal-caption {
+ position: fixed; bottom: 1.5rem; left: 50%;
+ transform: translateX(-50%);
+ font-family: 'Barlow', sans-serif;
+ font-size: 0.8rem;
+ color: rgba(255,255,255,0.6);
+ padding: 0.5rem 1.25rem;
+ border-radius: 9999px;
+ white-space: nowrap;
+ }
+ @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+ @keyframes scaleIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+ /* ── Gallery pagination ── */
+ .page-btn {
+ display: inline-flex; align-items: center; gap: 0.4rem;
+ font-family: 'Barlow', sans-serif;
+ font-size: 0.78rem; font-weight: 600;
+ padding: 0.55rem 1.25rem;
+ border-radius: 9999px;
+ cursor: pointer;
+ transition: all 0.3s ease;
+ border: none;
+ color: #fff;
+ }
+ .page-btn:disabled { opacity: 0.25; cursor: not-allowed; }
+ .page-btn:not(:disabled):hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+ .page-dot {
+ width: 7px; height: 7px; border-radius: 50%;
+ background: rgba(255,255,255,0.2);
+ cursor: pointer; transition: all 0.3s ease;
+ }
+ .page-dot.active {
+ background: #fff;
+ box-shadow: 0 0 8px rgba(255,255,255,0.5);
+ transform: scale(1.3);
+ }
+
+ /* ── Timeline ── */
+ .timeline-track {
+ position: absolute;
+ left: 50%; top: 0; bottom: 0;
+ width: 1px;
+ background: linear-gradient(180deg, transparent, rgba(255,255,255,0.15) 15%, rgba(255,255,255,0.15) 85%, transparent);
+ transform: translateX(-50%);
+ }
+ .timeline-node {
+ position: absolute;
+ left: 50%;
+ transform: translateX(-50%);
+ width: 10px; height: 10px;
+ border-radius: 50%;
+ background: #fff;
+ box-shadow: 0 0 14px rgba(255,255,255,0.6);
+ top: 1.5rem;
+ }
+ .timeline-entry { margin-bottom: 3rem; position: relative; }
+ .timeline-entry:nth-child(odd) .tl-content {
+ margin-right: auto; margin-left: 0;
+ width: 45%; text-align: right;
+ }
+ .timeline-entry:nth-child(even) .tl-content {
+ margin-left: auto; margin-right: 0;
+ width: 45%; text-align: left;
+ }
+ .tl-year {
+ font-family: 'Instrument Serif', serif;
+ font-style: italic;
+ font-size: 2.2rem;
+ line-height: 1;
+ letter-spacing: -0.03em;
+ color: #fff;
+ margin-bottom: 0.4rem;
+ }
+ .tl-title {
+ font-family: 'Barlow', sans-serif;
+ font-weight: 700;
+ font-size: 0.95rem;
+ margin-bottom: 0.5rem;
+ color: #fff;
+ }
+ .tl-desc {
+ font-family: 'Barlow', sans-serif;
+ font-weight: 300;
+ font-size: 0.82rem;
+ color: rgba(255,255,255,0.6);
+ line-height: 1.65;
+ margin-bottom: 0.75rem;
+ }
+ .tl-badge {
+ display: inline-block;
+ font-family: 'Barlow', sans-serif;
+ font-size: 0.72rem; font-weight: 600;
+ color: rgba(255,255,255,0.7);
+ padding: 0.3rem 0.85rem;
+ border-radius: 9999px;
+ }
+ @media (max-width: 768px) {
+ .timeline-track { left: 1.25rem; }
+ .timeline-node { left: 1.25rem; }
+ .timeline-entry:nth-child(odd) .tl-content,
+ .timeline-entry:nth-child(even) .tl-content {
+ margin-left: 3rem; margin-right: 0;
+ width: calc(100% - 3rem); text-align: left;
+ }
+ }
+
+ /* ── Generation card ── */
+ .gen-card {
+ border-radius: 1.25rem;
+ overflow: hidden;
+ transition: transform 0.35s ease;
+ position: relative;
+ }
+ .gen-card:hover { transform: translateY(-6px); }
+ .gen-card-img {
+ width: 100%; height: 13rem;
+ object-fit: cover;
+ display: block;
+ transition: transform 0.5s ease;
+ }
+ .gen-card:hover .gen-card-img { transform: scale(1.04); }
+ .gen-card-img-wrap {
+ width: 100%; height: 13rem;
+ overflow: hidden;
+ background: #111;
+ display: flex; align-items: center; justify-content: center;
+ }
+ .gen-card-body { padding: 1.25rem; }
+ .gen-badge {
+ display: inline-block;
+ font-family: 'Barlow', sans-serif;
+ font-size: 0.68rem; font-weight: 700;
+ color: rgba(255,255,255,0.85);
+ padding: 0.25rem 0.8rem;
+ border-radius: 9999px;
+ text-transform: uppercase;
+ letter-spacing: 0.06em;
+ margin-bottom: 0.75rem;
+ }
+ .gen-name {
+ font-family: 'Instrument Serif', serif;
+ font-style: italic;
+ font-size: 1.5rem;
+ line-height: 1;
+ letter-spacing: -0.02em;
+ color: #fff;
+ margin-bottom: 0.5rem;
+ }
+ .gen-desc {
+ font-family: 'Barlow', sans-serif;
+ font-weight: 300;
+ font-size: 0.8rem;
+ color: rgba(255,255,255,0.55);
+ line-height: 1.6;
+ margin-bottom: 1rem;
+ }
+ .gen-specs-grid {
+ display: grid; grid-template-columns: 1fr 1fr;
+ gap: 0.6rem; margin-bottom: 1rem;
+ }
+ .gen-spec {
+ border-radius: 0.75rem;
+ padding: 0.65rem;
+ text-align: center;
+ }
+ .gen-spec-val {
+ font-family: 'Instrument Serif', serif;
+ font-style: italic;
+ font-size: 1.3rem;
+ line-height: 1;
+ letter-spacing: -0.02em;
+ color: #fff;
+ }
+ .gen-spec-lbl {
+ font-family: 'Barlow', sans-serif;
+ font-size: 0.62rem; font-weight: 500;
+ color: rgba(255,255,255,0.4);
+ text-transform: uppercase;
+ letter-spacing: 0.06em;
+ margin-top: 0.2rem;
+ }
+ .gen-highlights { border-radius: 0.75rem; padding: 0.85rem; }
+ .gen-hi-title {
+ font-family: 'Barlow', sans-serif;
+ font-size: 0.65rem; font-weight: 700;
+ color: rgba(255,255,255,0.4);
+ text-transform: uppercase; letter-spacing: 0.1em;
+ margin-bottom: 0.5rem;
+ }
+ .gen-hi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.25rem; }
+ .gen-hi-item {
+ font-family: 'Barlow', sans-serif;
+ font-size: 0.72rem; font-weight: 400;
+ color: rgba(255,255,255,0.55);
+ padding: 0.2rem 0;
+ display: flex; align-items: center; gap: 0.35rem;
+ }
+ .gen-hi-item::before { content: '—'; color: rgba(255,255,255,0.25); font-size: 0.65rem; }
+
+ /* ── Hero anim ── */
+ @keyframes heroPulse {
+ 0%,100% { opacity: 0.06; transform: scale(1); }
+ 50% { opacity: 0.1; transform: scale(1.05); }
+ }
+ .hero-blob { animation: heroPulse 6s ease-in-out infinite; }
+ .hero-blob-2 { animation: heroPulse 8s ease-in-out infinite reverse; }
+
+ /* ── Video section ── */
+ .video-wrap {
+ position: relative;
+ border-radius: 1.25rem;
+ overflow: hidden;
+ cursor: pointer;
+ width: 50%;
+ margin-left: auto;
+ margin-right: auto;
+ }
+ .video-wrap img { width: 100%; display: block; }
+
+ /* ── Floating Home Button (global, alle Sections) ── */
+ .home-fab{
+ position:fixed; top:20px; right:20px; z-index:9999;
+ width:48px; height:48px; border-radius:9999px;
+ display:flex; align-items:center; justify-content:center;
+ background:rgba(255,255,255,0.08);
+ backdrop-filter:blur(20px) saturate(140%);
+ -webkit-backdrop-filter:blur(20px) saturate(140%);
+ border:1px solid rgba(255,255,255,0.18);
+ box-shadow:0 8px 32px rgba(0,0,0,0.35);
+ color:#fff; cursor:pointer;
+ transition:transform .25s ease, background .25s ease, opacity .35s ease;
+ opacity:0; pointer-events:none;
+ }
+ .home-fab.visible{opacity:1; pointer-events:auto;}
+ .home-fab:hover{background:rgba(255,255,255,0.16); transform:translateY(-2px) scale(1.05);}
+ .home-fab svg{width:20px; height:20px;}
+ .video-play-layer {
+ position: absolute; inset: 0;
+ display: flex; align-items: center; justify-content: center;
+ background: rgba(0,0,0,0.3);
+ transition: background 0.3s ease;
+ }
+ .video-wrap:hover .video-play-layer { background: rgba(0,0,0,0.15); }
+ .play-ring {
+ width: 5rem; height: 5rem;
+ border-radius: 50%;
+ display: flex; align-items: center; justify-content: center;
+ transition: transform 0.3s ease, box-shadow 0.3s ease;
+ }
+ .video-wrap:hover .play-ring {
+ transform: scale(1.12);
+ box-shadow: 0 0 40px rgba(255,255,255,0.2);
+ }
+ .yt-badge {
+ position: absolute; top: 1rem; left: 1rem;
+ font-family: 'Barlow', sans-serif;
+ font-size: 0.7rem; font-weight: 700;
+ color: #fff;
+ padding: 0.35rem 0.9rem;
+ border-radius: 9999px;
+ letter-spacing: 0.08em;
+ text-transform: uppercase;
+ }
+
+ /* ── Feature cards ── */
+ .feat-icon {
+ width: 3.5rem; height: 3.5rem;
+ border-radius: 1rem;
+ display: flex; align-items: center; justify-content: center;
+ margin-bottom: 1.25rem;
+ }
+
+ /* ── Footer ── */
+ .aeon-footer {
+ background: #000;
+ border-top: 1px solid rgba(255,255,255,0.06);
+ padding: 3rem 0;
+ position: relative;
+ }
+
+ /* ── Spec highlight card ── */
+ .spec-hero-card {
+ border-radius: 1.25rem;
+ padding: 2rem;
+ text-align: center;
+ position: relative;
+ overflow: hidden;
+ transition: transform 0.3s ease;
+ }
+ .spec-hero-card:hover { transform: translateY(-6px); }
+ .spec-hero-num {
+ font-family: 'Instrument Serif', serif;
+ font-style: italic;
+ font-size: 3.5rem;
+ line-height: 1;
+ letter-spacing: -0.04em;
+ color: #fff;
+ display: block;
+ }
+ .spec-hero-unit {
+ font-family: 'Barlow', sans-serif;
+ font-size: 0.72rem; font-weight: 600;
+ color: rgba(255,255,255,0.45);
+ text-transform: uppercase;
+ letter-spacing: 0.1em;
+ margin-top: 0.4rem;
+ display: block;
+ }
+ .spec-hero-sub {
+ font-family: 'Barlow', sans-serif;
+ font-size: 0.72rem; font-weight: 300;
+ color: rgba(255,255,255,0.3);
+ margin-top: 0.25rem;
+ display: block;
+ }
+ /* ── Cinematic video background (Prisma-Stil, hinter der kompletten Seite) ── */
+ body{background:#000 !important;}
+ .cinematic-bg{
+ position:fixed;inset:0;z-index:0;
+ pointer-events:none;overflow:hidden;
+ background:#000;
+ width:100vw;height:100vh;height:100dvh;
+ }
+ .cinematic-bg.is-active{opacity:1}
+ .cinematic-bg video.bg-video{
+ position:absolute;top:0;left:0;
+ width:100%;height:100%;
+ object-fit:cover;
+ object-position:center center;
+ filter:saturate(1.12) contrast(1.06) brightness(1.35);
+ display:block;
+ opacity:0;
+ transition:opacity 1.1s ease;
+ }
+ .cinematic-bg video.bg-video.is-live{ opacity:1; }
+ .cinematic-bg .tint{position:absolute;inset:0;background:rgba(0,0,0,.28)}
+ .cinematic-bg .noise-overlay{
+ position:absolute;inset:0;opacity:.7;mix-blend-mode:overlay;pointer-events:none;
+ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+ background-size:300px 300px;
+ }
+ .cinematic-bg .grad{position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.30), rgba(0,0,0,0) 30%, rgba(0,0,0,0) 70%, rgba(0,0,0,0.60));}
+ #root{background:transparent !important;}
+ #root section,
+ #root header,
+ #root footer,
+ #video,
+ #geschichte,
+ #generationen{background:transparent !important}
+ #root section::before,
+ #root section::after,
+ #video::before,
+ #video::after,
+ #geschichte::before,
+ #geschichte::after,
+ #generationen::before,
+ #generationen::after{pointer-events:none}
+
+ /* ═══════════════════════════════════════════
+ TURBO UPGRADE — extra Effekte
+ ═══════════════════════════════════════════ */
+
+ /* Boost-Progressbar oben (RPM-Style) */
+ #boostBar{
+ position:fixed; top:0; left:0; height:3px; width:0%;
+ z-index:9998; pointer-events:none;
+ background:linear-gradient(90deg,#7f1d1d,#dc2626 40%,#ef4444 70%,#fca5a5);
+ box-shadow:0 0 12px 2px rgba(220,38,38,0.75), 0 0 30px 4px rgba(220,38,38,0.35);
+ transition:width 0.08s linear;
+ }
+
+ /* Custom Cursor — Tacho-Nadel-Glow */
+ @media (hover:hover) and (pointer:fine){
+ html.turbo-cursor, html.turbo-cursor * { cursor:none !important; }
+ }
+ #cursorDot, #cursorRing{
+ position:fixed; top:0; left:0; z-index:9999; pointer-events:none;
+ transform:translate(-50%,-50%);
+ will-change:transform;
+ }
+ #cursorDot{
+ width:7px; height:7px; border-radius:50%;
+ background:#ff2d2d;
+ box-shadow:0 0 8px 2px rgba(255,45,45,0.9), 0 0 20px 6px rgba(220,38,38,0.5);
+ }
+ #cursorRing{
+ width:34px; height:34px; border-radius:50%;
+ border:1px solid rgba(220,38,38,0.55);
+ transition:width 0.25s ease, height 0.25s ease, border-color 0.25s ease, opacity 0.25s ease;
+ opacity:0.85;
+ }
+ #cursorRing.hovering{
+ width:56px; height:56px;
+ border-color:rgba(255,255,255,0.8);
+ background:rgba(220,38,38,0.08);
+ }
+ #cursorRing.clicking{ width:26px; height:26px; }
+
+ /* Speed-Streak Canvas im Hero */
+ #speedCanvas{
+ position:absolute; inset:0; z-index:1;
+ pointer-events:none; opacity:0.55;
+ mix-blend-mode:screen;
+ }
+
+ /* 3D Tilt Container */
+ .tilt-target{ transform-style:preserve-3d; will-change:transform; transition:transform 0.15s ease-out, box-shadow 0.3s ease; }
+ .tilt-target:hover{ box-shadow:0 20px 60px -15px rgba(220,38,38,0.35); }
+
+ /* Magnetische Buttons */
+ .aeon-btn{ will-change:transform; }
+
+ /* Glüh-Flackern auf rotem Akzent-Text */
+ @keyframes emberFlicker{
+ 0%,100%{ text-shadow:0 0 20px rgba(220,38,38,0.5), 0 0 40px rgba(220,38,38,0.15); }
+ 45%{ text-shadow:0 0 26px rgba(220,38,38,0.75), 0 0 55px rgba(220,38,38,0.3); }
+ 50%{ text-shadow:0 0 14px rgba(220,38,38,0.35), 0 0 25px rgba(220,38,38,0.1); }
+ 55%{ text-shadow:0 0 26px rgba(220,38,38,0.75), 0 0 55px rgba(220,38,38,0.3); }
+ }
+ .rs3-red-glow{ animation:emberFlicker 4.5s ease-in-out infinite; }
+
+ /* Klick-Burst (Funken) */
+ .spark-burst{
+ position:fixed; z-index:9997; pointer-events:none;
+ width:6px; height:6px; border-radius:50%;
+ background:#ef4444;
+ box-shadow:0 0 6px 2px rgba(239,68,68,0.8);
+ animation:sparkOut 0.6s ease-out forwards;
+ }
+ @keyframes sparkOut{
+ to{ transform:translate(var(--sx), var(--sy)) scale(0); opacity:0; }
+ }
+
+ @media (prefers-reduced-motion: reduce){
+ .rs3-red-glow{ animation:none; }
+ }
+ @media (max-width:768px){
+ #cursorDot, #cursorRing{ display:none; }
+ }
+</style>
+</head>
+
+<body>
+
+
+<!-- Cinematic background: Blumen/Kristalle — global als Hintergrund auf der gesamten Seite -->
+<div class="cinematic-bg is-active" id="cinematicBg" aria-hidden="true">
+ <video id="bgVidA" class="bg-video" autoplay muted playsinline preload="auto" disablepictureinpicture>
+ <source src="Myvideo.mp4" type="video/mp4">
+ </video>
+ <video id="bgVidB" class="bg-video" muted playsinline preload="auto" disablepictureinpicture>
+ <source src="Myvideo.mp4" type="video/mp4">
+ </video>
+ <div class="tint"></div>
+ <div class="noise-overlay"></div>
+ <div class="grad"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+ AEON HERO + CAPABILITIES (React / Framer)
+═══════════════════════════════════════════ -->
+<div id="root" style="position:relative;z-index:1;background:transparent;"></div>
+
+<!-- Icons -->
+<script type="text/babel">const ArrowUpRight = ({ className = "h-5 w-5" }) => (
+ <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+ <path d="M7 17L17 7"/><path d="M7 7h10v10"/>
+ </svg>
+);
+const PlayIcon = ({ className = "h-5 w-5" }) => (
+ <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+ <polygon points="6 4 20 12 6 20 6 4"/>
+ </svg>
+);
+const ClockIcon = ({ className = "h-6 w-6" }) => (
+ <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+ <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>
+ </svg>
+);
+const GlobeIcon = ({ className = "h-6 w-6" }) => (
+ <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+ <circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18z"/>
+ </svg>
+);
+const MI = ({ d, className = "h-6 w-6 text-white" }) => (
+ <svg className={className} viewBox="0 0 24 24" fill="currentColor"><path d={d}/></svg>
+);
+const D_IMAGE = "M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h14q.825 0 1.413.588T21 5v14q0 .825-.587 1.413T19 21H5Zm1-4h12l-3.75-5-3 4L9 13l-3 4Z";
+const D_MOVIE = "M4 6.47 5.76 10H20v8H4V6.47M22 4h-4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.89-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4Z";
+const D_BULB = "M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1Zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7Z";
+window._icons = { ArrowUpRight, PlayIcon, ClockIcon, GlobeIcon, MI, D_IMAGE, D_MOVIE, D_BULB };
+</script>
+
+<!-- FadingVideo -->
+<script type="text/babel">const { useEffect, useRef } = React;
+const FADE_MS = 500, FADE_LEAD = 0.55;
+function FadingVideo({ src, className }) {
+ const ref = useRef(null);
+ const raf = useRef(null);
+ const fadingOut = useRef(false);
+ useEffect(() => {
+ const v = ref.current; if (!v) return;
+ v.style.opacity = "0";
+ const fadeTo = (target, dur = FADE_MS) => {
+ if (raf.current) cancelAnimationFrame(raf.current);
+ const t0 = performance.now(), from = parseFloat(v.style.opacity || "0");
+ const step = now => {
+ const p = Math.min(1, (now - t0) / dur);
+ v.style.opacity = String(from + (target - from) * p);
+ if (p < 1) raf.current = requestAnimationFrame(step);
+ };
+ raf.current = requestAnimationFrame(step);
+ };
+ const onLoad = () => { v.style.opacity="0"; const p=v.play(); if(p&&p.catch)p.catch(()=>{}); fadeTo(1); };
+ const onTime = () => {
+ const d=v.duration; if(!isFinite(d)) return;
+ if (!fadingOut.current && d-v.currentTime<=FADE_LEAD) { fadingOut.current=true; fadeTo(0); }
+ };
+ const onEnd = () => {
+ v.style.opacity="0";
+ setTimeout(()=>{ try{v.currentTime=0;}catch(e){} const p=v.play();if(p&&p.catch)p.catch(()=>{}); fadingOut.current=false; fadeTo(1); },100);
+ };
+ v.addEventListener("loadeddata",onLoad);
+ v.addEventListener("timeupdate",onTime);
+ v.addEventListener("ended",onEnd);
+ return () => { if(raf.current)cancelAnimationFrame(raf.current); v.removeEventListener("loadeddata",onLoad); v.removeEventListener("timeupdate",onTime); v.removeEventListener("ended",onEnd); };
+ }, [src]);
+ return <video ref={ref} src={src} autoPlay muted playsInline preload="auto" className={className} style={{opacity:0}} />;
+}
+window.FadingVideo = FadingVideo;
+</script>
+
+<!-- BlurText -->
+<script type="text/babel">const { useEffect: useE2, useRef: useR2, useState } = React;
+const { motion } = window.Motion;
+function BlurText({ text, className }) {
+ const ref = useR2(null);
+ const [vis, setVis] = useState(false);
+ useE2(() => {
+ const el = ref.current; if(!el) return;
+ const io = new IntersectionObserver(([e])=>{ if(e.isIntersecting){setVis(true);io.disconnect();} },{threshold:0.1});
+ io.observe(el); return ()=>io.disconnect();
+ },[]);
+ const words = text.split(" ");
+ return (
+ <p ref={ref} className={className} style={{display:"flex",flexWrap:"wrap",justifyContent:"center",rowGap:"0.1em"}}>
+ {words.map((w,i)=>(
+ <motion.span key={i} style={{display:"inline-block",marginRight:"0.28em"}}
+ initial={{filter:"blur(10px)",opacity:0,y:50}}
+ animate={vis?{filter:["blur(10px)","blur(5px)","blur(0px)"],opacity:[0,0.5,1],y:[50,-5,0]}:{}}
+ transition={{duration:0.7,times:[0,0.5,1],ease:"easeOut",delay:i*0.1}}>
+ {w}
+ </motion.span>
+ ))}
+ </p>
+ );
+}
+window.BlurText = BlurText;
+
+function CountUp({ to, decimals = 0, duration = 1800, suffix = "", decimalSep = ",", delay = 0, className }) {
+  const ref = useR2(null);
+  const [val, setVal] = useState(0);
+  const [start, setStart] = useState(false);
+  useE2(() => {
+    const el = ref.current; if(!el) return;
+    const io = new IntersectionObserver(([e])=>{ if(e.isIntersecting){setStart(true);io.disconnect();} },{threshold:0.3});
+    io.observe(el); return ()=>io.disconnect();
+  },[]);
+  useE2(() => {
+    if(!start) return;
+    let raf, t0;
+    const t = setTimeout(() => {
+      const step = (ts) => {
+        if(!t0) t0 = ts;
+        const p = Math.min((ts - t0) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        setVal(to * eased);
+        if(p < 1) raf = requestAnimationFrame(step);
+        else setVal(to);
+      };
+      raf = requestAnimationFrame(step);
+    }, delay);
+    return () => { clearTimeout(t); if(raf) cancelAnimationFrame(raf); };
+  }, [start, to, duration, delay]);
+  const formatted = val.toFixed(decimals).replace(".", decimalSep);
+  return <span ref={ref} className={className}>{formatted}{suffix}</span>;
+}
+window.CountUp = CountUp;
+</script>
+
+<!-- Hero + Capabilities -->
+<script type="text/babel">
+(function(){
+ const { motion } = window.Motion;
+ const { ArrowUpRight, PlayIcon, ClockIcon, GlobeIcon, MI, D_IMAGE, D_MOVIE, D_BULB } = window._icons;
+ const FV = window.FadingVideo, BT = window.BlurText, CU = window.CountUp;
+ const ease = "easeOut";
+ const ini = { filter:"blur(10px)", opacity:0, y:20 };
+ const ani = { filter:"blur(0px)", opacity:1, y:0 };
+
+ function StatCard({ Icon, value, label }) {
+ return (
+ <div className="liquid-glass p-4 w-48" style={{borderRadius:"1.25rem"}}>
+ <Icon className="h-5 w-5 text-white opacity-70" />
+ <div className="mt-3 font-heading italic text-white text-3xl leading-none" style={{letterSpacing:"-1px"}}>{value}</div>
+ <div className="text-xs text-white/50 font-body font-light mt-1.5">{label}</div>
+ </div>
+ );
+ }
+
+ function CapCard({ iconPath, tags, title, body, delay }) {
+ return (
+ <motion.div initial={ini} whileInView={ani} viewport={{once:true,amount:0.2}}
+ transition={{duration:0.8,ease,delay}}
+ className="liquid-glass p-6 flex flex-col" style={{borderRadius:"1.25rem",minHeight:"340px"}}>
+ <div className="flex items-start justify-between gap-4">
+ <div className="liquid-glass w-10 h-10 flex items-center justify-center flex-shrink-0" style={{borderRadius:"0.75rem"}}>
+ <MI d={iconPath} className="h-5 w-5 text-white" />
+ </div>
+ <div className="flex flex-wrap justify-end gap-1.5 max-w-[70%]">
+ {tags.map(t=>(
+ <span key={t} className="liquid-glass rounded-full px-3 py-1 text-[10px] text-white/80 font-body">{t}</span>
+ ))}
+ </div>
+ </div>
+ <div className="flex-1"/>
+ <div className="mt-6">
+ <h3 className="font-heading italic text-white text-3xl leading-none" style={{letterSpacing:"-1px"}}>{title}</h3>
+ <p className="mt-2 text-sm text-white/70 font-body font-light leading-snug max-w-[32ch]">{body}</p>
+ </div>
+ </motion.div>
+ );
+ }
+
+ function App() {
+ return (
+ <main>
+ {/* ── Hero ── */}
+ <section className="relative w-full h-screen overflow-hidden" style={{background:"transparent"}}>
+
+ {/* Aeon minimal navbar */}
+ <nav className="absolute top-4 left-0 right-0 z-20 px-8 flex items-center justify-between">
+ <div className="liquid-glass w-10 h-10 flex items-center justify-center rounded-full">
+ <span className="font-heading italic text-white text-xl leading-none">a</span>
+ </div>
+ <div className="hidden md:flex liquid-glass rounded-full px-1.5 py-1.5 items-center gap-0.5">
+ {["Galerie","Video","Geschichte","Generationen"].map(l=>(
+ <a key={l} href={"#"+l.toLowerCase()} className="px-3 py-1.5 text-xs font-body font-medium text-white/80 rounded-full hover:text-white hover:bg-white/10 transition-all">{l}</a>
+ ))}
+ </div>
+ <button onClick={()=>window.scrollTo({top:0,behavior:'smooth'})}
+ aria-label="Nach oben"
+ className="liquid-glass w-10 h-10 flex items-center justify-center rounded-full text-white/80 hover:text-white transition-all">
+ <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12l9-9 9 9"/><path d="M9 21V12h6v9"/></svg>
+ </button>
+ </nav>
+
+ <div className="relative z-10 flex flex-col h-full items-center justify-center text-center px-4 pb-24 pt-20">
+ <motion.div initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} transition={{duration:0.6,ease,delay:0.2}}
+ className="liquid-glass rounded-full px-4 py-1.5 text-xs font-body font-medium text-white/70 mb-6">LEGENDÄRER FÜNFZYLINDER
+ </motion.div>
+
+ <div className="max-w-3xl rs3-glitch" data-text="Audi RS3 Sportback 2011">
+ <BT text="Audi RS3 Sportback 2011"
+ className="font-heading italic text-white text-4xl md:text-5xl lg:text-6xl leading-[0.92]" />
+ </div>
+
+ <motion.p initial={ini} animate={ani} transition={{duration:0.8,ease,delay:0.8}}
+ className="mt-4 text-sm text-white/65 max-w-md font-body font-light leading-relaxed">340 PS reiner Emotion. Der ikonische 2.5 TFSI Fünfzylinder-Turbomotor in seiner reinsten Form — das Original.
+ </motion.p>
+
+ <motion.div initial={ini} animate={ani} transition={{duration:0.8,ease,delay:1.05}}
+ className="flex items-center gap-4 mt-6">
+ <a href="#galerie"
+ onClick={e=>{e.preventDefault();document.getElementById('galerie')?.scrollIntoView({behavior:'smooth',block:'start'});}}
+ className="liquid-glass-strong magnetic sheen rounded-full px-5 py-2.5 text-sm font-body font-medium text-white inline-flex items-center gap-2">Entdecken <ArrowUpRight className="h-4 w-4" />
+ </a>
+ <a href="#video"
+ onClick={e=>{e.preventDefault();document.getElementById('video')?.scrollIntoView({behavior:'smooth',block:'start'});}}
+ className="liquid-glass magnetic sheen rounded-full px-5 py-2.5 text-sm font-body font-medium text-white/70 inline-flex items-center gap-2">
+ <PlayIcon className="h-4 w-4" />Video
+ </a>
+ </motion.div>
+
+ <motion.div initial={ini} animate={ani} transition={{duration:0.8,ease,delay:1.25}}
+ className="flex gap-4 mt-8">
+ <div className="liquid-glass px-5 py-3 text-center tilt" style={{borderRadius:"1rem"}}>
+ <div className="font-heading italic text-white text-2xl leading-none stat-glow"><CU to={340} duration={1800} delay={100} /></div>
+ <div className="text-[10px] text-white/40 font-body mt-1 uppercase tracking-widest">PS</div>
+ </div>
+ <div className="liquid-glass px-5 py-3 text-center tilt" style={{borderRadius:"1rem"}}>
+ <div className="font-heading italic text-white text-2xl leading-none stat-glow"><CU to={4.2} decimals={1} duration={1800} delay={300} suffix="s" /></div>
+ <div className="text-[10px] text-white/40 font-body mt-1 uppercase tracking-widest">0–100</div>
+ </div>
+ <div className="liquid-glass px-5 py-3 text-center tilt" style={{borderRadius:"1rem"}}>
+ <div className="font-heading italic text-white text-2xl leading-none stat-glow"><CU to={250} duration={2000} delay={500} /></div>
+ <div className="text-[10px] text-white/40 font-body mt-1 uppercase tracking-widest">km/h</div>
+ </div>
+ </motion.div>
+ </div>
+
+ {/* Scroll hint */}
+ <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{delay:2,duration:1}}
+ className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
+ <div className="w-px h-10 bg-gradient-to-b from-transparent to-white/30"/>
+ <span className="text-white/30 text-[10px] font-body uppercase tracking-widest">Scroll</span>
+ </motion.div>
+ </section>
+
+ {/* Capabilities-Sektion entfernt */}
+ </main>
+ );
+ }
+
+ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+})();
+</script>
+
+
+<!-- ═══════════════════════════════════════════
+ PROGRESS SIDEBAR
+═══════════════════════════════════════════ -->
+<div class="progress-sidebar" id="progressSidebar">
+ <div class="progress-item" data-target="__top">
+ <span class="progress-label">Home</span>
+ <div class="progress-dot"></div>
+ </div>
+ <div class="progress-item" data-target="galerie">
+ <span class="progress-label">Galerie</span>
+ <div class="progress-dot"></div>
+ </div>
+ <!-- Technik entfernt -->
+ <div class="progress-item" data-target="video">
+ <span class="progress-label">Video</span>
+ <div class="progress-dot"></div>
+ </div>
+ <div class="progress-item" data-target="geschichte">
+ <span class="progress-label">Geschichte</span>
+ <div class="progress-dot"></div>
+ </div>
+ <div class="progress-item" data-target="generationen">
+ <span class="progress-label">Generationen</span>
+ <div class="progress-dot"></div>
+ </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+ GALERIE
+═══════════════════════════════════════════ -->
+<section id="galerie" class="aeon-section py-28 px-6 md:px-16">
+ <!-- ambient -->
+ <div class="blob blob-red w-[600px] h-[600px]" style="top:-10%;right:-10%;opacity:0.5;"></div>
+ <div class="blob blob-dark-red w-[500px] h-[500px]" style="bottom:-10%;left:-5%;opacity:0.4;"></div>
+
+ <div class="max-w-6xl mx-auto relative z-10">
+
+ <!-- Header -->
+ <div class="mb-14 reveal">
+ <p class="section-label">// Visual Experience</p>
+ <h2 class="aeon-heading text-5xl md:text-6xl lg:text-7xl mb-4">Bild<em style="font-style:normal;color:rgba(255,255,255,0.35);">galerie</em>
+ </h2>
+ <p class="aeon-body text-sm max-w-lg">Entdecken Sie jeden Winkel des legendären RS3 Sportback. Klick auf ein Foto zum Zoomen.
+ </p>
+ </div>
+
+ <!-- Grid -->
+ <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4" id="galleryGrid">
+
+ <!-- Page 1 -->
+ <div class="gallery-page active" data-page="1">
+ <div class="gallery-item h-64 tilt reveal reveal-d1" data-src="bilder/01.jpg" data-alt="RS3 Foto 1" data-num="01">
+ <img src="bilder/01.jpg" alt="RS3 Foto 1" onerror="this.src='https://s1.cdn.autoevolution.com/images/gallery/AUDIRS3Sportback-4360_35.jpg'">
+ <div class="gallery-item-overlay"><span class="gallery-num">01</span></div>
+ </div>
+ <div class="gallery-item h-64 tilt reveal reveal-d2" data-src="bilder/02.jpg" data-alt="RS3 Foto 2" data-num="02">
+ <img src="bilder/02.jpg" alt="RS3 Foto 2" onerror="this.src='https://i.ibb.co/dgXCkTs/12.jpg'">
+ <div class="gallery-item-overlay"><span class="gallery-num">02</span></div>
+ </div>
+ <div class="gallery-item h-64 tilt reveal reveal-d3" data-src="bilder/03.jpg" data-alt="RS3 Foto 3" data-num="03">
+ <img src="bilder/03.jpg" alt="RS3 Foto 3" onerror="this.src='https://c7.alamy.com/zooms/9/9f60a24287d447ac8af9a95fc73ccd50/kxad1g.jpg'">
+ <div class="gallery-item-overlay"><span class="gallery-num">03</span></div>
+ </div>
+ <div class="gallery-item h-64 tilt reveal reveal-d1" data-src="bilder/06.jpg" data-alt="RS3 Foto 6" data-num="04">
+ <img src="bilder/06.jpg" alt="RS3 Foto 6" onerror="this.src='https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=600&h=400&fit=crop'">
+ <div class="gallery-item-overlay"><span class="gallery-num">04</span></div>
+ </div>
+ <div class="gallery-item h-64 tilt reveal reveal-d2" data-src="bilder/07.jpg" data-alt="RS3 Foto 7" data-num="05">
+ <img src="bilder/07.jpg" alt="RS3 Foto 7" onerror="this.src='https://images.unsplash.com/photo-1494976866556-6812c9d1c72e?w=600&h=400&fit=crop'">
+ <div class="gallery-item-overlay"><span class="gallery-num">05</span></div>
+ </div>
+ <div class="gallery-item h-64 tilt reveal reveal-d3" data-src="bilder/08.jpg" data-alt="RS3 Foto 8" data-num="06">
+ <img src="bilder/08.jpg" alt="RS3 Foto 8" onerror="this.src='https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=600&h=400&fit=crop'">
+ <div class="gallery-item-overlay"><span class="gallery-num">06</span></div>
+ </div>
+ </div>
+
+ <!-- Page 2 -->
+ <div class="gallery-page" data-page="2">
+ <div class="gallery-item h-64 tilt reveal reveal-d1" data-src="bilder/09.jpg" data-alt="RS3 Foto 9" data-num="07">
+ <img src="bilder/09.jpg" alt="RS3 Foto 9" onerror="this.src='https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe3e?w=600&h=400&fit=crop'">
+ <div class="gallery-item-overlay"><span class="gallery-num">07</span></div>
+ </div>
+ <div class="gallery-item h-64 tilt reveal reveal-d2" data-src="bilder/10.jpg" data-alt="RS3 Foto 10" data-num="08">
+ <img src="bilder/10.jpg" alt="RS3 Foto 10" onerror="this.src='https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=600&h=400&fit=crop'">
+ <div class="gallery-item-overlay"><span class="gallery-num">08</span></div>
+ </div>
+ <div class="gallery-item h-64 tilt reveal reveal-d3" data-src="bilder/11.jpg" data-alt="RS3 Foto 11" data-num="09">
+ <img src="bilder/11.jpg" alt="RS3 Foto 11" onerror="this.src='https://images.unsplash.com/photo-1494976866556-6812c9d1c72e?w=600&h=400&fit=crop'">
+ <div class="gallery-item-overlay"><span class="gallery-num">09</span></div>
+ </div>
+ <div class="gallery-item h-64 tilt reveal reveal-d1" data-src="bilder/12.jpg" data-alt="RS3 Foto 12" data-num="10">
+ <img src="bilder/12.jpg" alt="RS3 Foto 12" onerror="this.src='https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe3e?w=600&h=400&fit=crop'">
+ <div class="gallery-item-overlay"><span class="gallery-num">10</span></div>
+ </div>
+ <div class="gallery-item h-64 tilt reveal reveal-d2" data-src="bilder/13.jpg" data-alt="RS3 Foto 13" data-num="11">
+ <img src="bilder/13.jpg" alt="RS3 Foto 13" onerror="this.src='https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=600&h=400&fit=crop'">
+ <div class="gallery-item-overlay"><span class="gallery-num">11</span></div>
+ </div>
+ <div class="gallery-item h-64 tilt reveal reveal-d3" data-src="bilder/14.jpg" data-alt="RS3 Foto 14" data-num="12">
+ <img src="bilder/14.jpg" alt="RS3 Foto 14" onerror="this.src='https://images.unsplash.com/photo-1494976866556-6812c9d1c72e?w=600&h=400&fit=crop'">
+ <div class="gallery-item-overlay"><span class="gallery-num">12</span></div>
+ </div>
+ </div>
+ </div>
+
+ <!-- Pagination -->
+ <div class="flex items-center justify-center gap-5 mt-10">
+ <button class="page-btn liquid-glass sheen" id="gPrev" disabled>← Zurück</button>
+ <div class="flex gap-2.5" id="gDots">
+ <div class="page-dot active" data-page="1"></div>
+ <div class="page-dot" data-page="2"></div>
+ </div>
+ <button class="page-btn liquid-glass sheen" id="gNext">Weiter →</button>
+ </div>
+ <p class="text-center text-white/25 text-xs font-body mt-3" id="gInfo">Seite 1 von 2</p>
+ </div>
+</section>
+
+<!-- Modal -->
+<div class="modal-backdrop" id="modal">
+ <button class="modal-close-btn liquid-glass" id="modalClose">&times;</button>
+ <img id="modalImg" src="" alt="" class="modal-img">
+ <div class="modal-caption liquid-glass" id="modalCaption">Foto</div>
+</div>
+
+
+<!-- Technik-Sektion entfernt -->
+
+
+
+<!-- ═══════════════════════════════════════════
+ VIDEO
+═══════════════════════════════════════════ -->
+<section id="video" class="aeon-section py-28 px-6 md:px-16">
+ <div class="blob blob-dark-red w-[700px] h-[700px]" style="bottom:-15%;right:-10%;opacity:0.5;"></div>
+
+ <div class="max-w-5xl mx-auto relative z-10">
+
+ <div class="text-center mb-14 reveal">
+ <p class="section-label">// Audio Experience</p>
+ <h2 class="aeon-heading text-5xl md:text-6xl lg:text-7xl mb-4">RS3 in <em style="font-style:normal;color:rgba(255,255,255,0.35);">Aktion</em></h2>
+ <p class="aeon-body text-sm max-w-md mx-auto">Erleben Sie den legendären Fünfzylinder-Sound — unverwechselbar, unvergesslich.</p>
+ </div>
+
+ <div class="reveal from-scale">
+ <a href="https://www.youtube.com/watch?v=0m_-XGnco9s" target="_blank" rel="noopener noreferrer" class="video-wrap block">
+ <div class="yt-badge liquid-glass">▶ Watch Now</div>
+ <img src="https://i.ytimg.com/vi/0m_-XGnco9s/maxresdefault.jpg" alt="RS3 Video">
+ <div class="video-play-layer">
+ <div class="play-ring liquid-glass-strong">
+ <svg class="w-7 h-7 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+ <path d="M8 5v14l11-7z"/>
+ </svg>
+ </div>
+ </div>
+ </a>
+
+ <div class="text-center mt-8">
+ <a href="https://www.youtube.com/watch?v=0m_-XGnco9s" target="_blank" rel="noopener noreferrer"
+ class="aeon-btn liquid-glass-strong sheen magnetic">
+ <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+ <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+ </svg>Zum YouTube Video
+ </a>
+ </div>
+ </div>
+
+ </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+ GESCHICHTE / TIMELINE
+═══════════════════════════════════════════ -->
+<section id="geschichte" class="aeon-section-alt py-28 px-6 md:px-16">
+ <div class="blob blob-red w-[600px] h-[600px]" style="top:0;left:50%;transform:translateX(-50%);opacity:0.3;"></div>
+
+ <div class="max-w-5xl mx-auto relative z-10">
+
+ <div class="text-center mb-16 reveal">
+ <p class="section-label">// Eine Legende entsteht</p>
+ <h2 class="aeon-heading text-5xl md:text-6xl lg:text-7xl mb-4">Geschichte des <em style="font-style:normal;color:rgba(255,255,255,0.35);">5-Zylinders</em>
+ </h2>
+ <p class="aeon-body text-sm max-w-md mx-auto">Vom Rallyesport bis zur modernen Hochleistung — ein halbes Jahrhundert Leidenschaft.</p>
+ </div>
+
+ <div class="relative" style="padding:2.5rem 0;">
+ <div class="timeline-track"></div>
+
+ <!-- Entries -->
+ <div class="timeline-entry reveal">
+ <div class="timeline-node"></div>
+ <div class="tl-content">
+ <div class="tl-year">1980er</div>
+ <div class="tl-title">Rallye-Legende</div>
+ <p class="tl-desc">Der Fünfzylinder-Motor wird zur Waffe im Rallye-Sport. Audi gewinnt mehrere Meisterschaften mit unverwechselbarem Sound.</p>
+ <span class="tl-badge liquid-glass">Rallye-Sieger</span>
+ </div>
+ </div>
+
+ <div class="timeline-entry reveal reveal-d1">
+ <div class="timeline-node"></div>
+ <div class="tl-content">
+ <div class="tl-year">1990er</div>
+ <div class="tl-title">Erstes Alltagsauto</div>
+ <p class="tl-desc">Der 5-Zylinder findet Einzug in Serienfahrzeuge. Kultiger Motor für den Alltag — zugänglich und trotzdem besonders.</p>
+ <span class="tl-badge liquid-glass">Serienauto</span>
+ </div>
+ </div>
+
+ <div class="timeline-entry reveal">
+ <div class="timeline-node"></div>
+ <div class="tl-content">
+ <div class="tl-year">2000er</div>
+ <div class="tl-title">TFSI Revolution</div>
+ <p class="tl-desc">Der 2.5 TFSI wird geboren — das spätere Herz des RS3. Direkteinspritzung trifft Turboaufladung.</p>
+ <span class="tl-badge liquid-glass">TFSI Tech</span>
+ </div>
+ </div>
+
+ <div class="timeline-entry reveal reveal-d1">
+ <div class="timeline-node"></div>
+ <div class="tl-content">
+ <div class="tl-year">2011</div>
+ <div class="tl-title">RS3 Sportback Debut</div>
+ <p class="tl-desc">340 PS und legendärer Sound revolutionieren die Kompaktklasse. Ein Meilenstein der Automobilgeschichte.</p>
+ <span class="tl-badge liquid-glass">Legende</span>
+ </div>
+ </div>
+
+ <div class="timeline-entry reveal">
+ <div class="timeline-node"></div>
+ <div class="tl-content">
+ <div class="tl-year">2012–2015</div>
+ <div class="tl-title">Goldene Jahre (8P)</div>
+ <p class="tl-desc">Weltweite Anerkennung. Der RS3 wird zum Liebling der Performance-Fans — Kultstatus fest zementiert.</p>
+ <span class="tl-badge liquid-glass">Favorit</span>
+ </div>
+ </div>
+
+ <div class="timeline-entry reveal reveal-d1">
+ <div class="timeline-node"></div>
+ <div class="tl-content">
+ <div class="tl-year">2015–2020</div>
+ <div class="tl-title">Zweite Generation (8V)</div>
+ <p class="tl-desc">400 PS, aggressiveres Design und mehr Raffinesse. Das Erbe wird fortgesetzt und übertroffen.</p>
+ <span class="tl-badge liquid-glass">400 PS</span>
+ </div>
+ </div>
+
+ <div class="timeline-entry reveal">
+ <div class="timeline-node"></div>
+ <div class="tl-content">
+ <div class="tl-year">2020–2024</div>
+ <div class="tl-title">Dritte Generation (8Y)</div>
+ <p class="tl-desc">407 PS mit Mild-Hybrid-Technologie. Modernste Systeme kombiniert mit unnachgiebiger Hochleistung.</p>
+ <span class="tl-badge liquid-glass">407 PS + Hybrid</span>
+ </div>
+ </div>
+
+ <div class="timeline-entry reveal reveal-d1">
+ <div class="timeline-node"></div>
+ <div class="tl-content">
+ <div class="tl-year">2024+</div>
+ <div class="tl-title">Das Vermächtnis</div>
+ <p class="tl-desc">Von Rallye bis RS — der 5-Zylinder bleibt unsterblich. Ein Klang, eine Seele, eine Legende.</p>
+ <span class="tl-badge liquid-glass">Unsterblich</span>
+ </div>
+ </div>
+
+ </div>
+ </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+ GENERATIONEN
+═══════════════════════════════════════════ -->
+<section id="generationen" class="aeon-section py-28 px-6 md:px-16">
+ <div class="blob blob-red w-[500px] h-[500px]" style="top:-5%;left:-5%;opacity:0.3;"></div>
+ <div class="blob blob-dark-red w-[500px] h-[500px]" style="bottom:-5%;right:-5%;opacity:0.3;"></div>
+
+ <div class="max-w-6xl mx-auto relative z-10">
+
+ <div class="text-center mb-14 reveal">
+ <p class="section-label">// Evolution der Legende</p>
+ <h2 class="aeon-heading text-5xl md:text-6xl lg:text-7xl mb-4">Generationen<em style="font-style:normal;color:rgba(255,255,255,0.35);">vergleich</em>
+ </h2>
+ <p class="aeon-body text-sm max-w-lg mx-auto">Von der 8P über 8V bis zur modernen 8Y — die Evolution in drei Kapiteln.</p>
+ </div>
+
+ <div class="grid md:grid-cols-3 gap-5">
+
+ <!-- 8P -->
+ <div class="gen-card liquid-glass tilt reveal from-scale reveal-d1">
+ <div class="gen-card-img-wrap">
+ <img src="bilder/rs3-8p.jpg" alt="RS3 8P" class="gen-card-img"
+ onerror="this.src='https://i.ibb.co/dgXCkTs/12.jpg'">
+ </div>
+ <div class="gen-card-body">
+ <span class="gen-badge liquid-glass">8P · 2011–2015</span>
+ <div class="gen-name">Die Legende</div>
+ <p class="gen-desc">340 PS, Carbon-Kotflügel und legendärer 5-Zylinder Sound. Das unverfälschte Original.</p>
+ <div class="gen-specs-grid">
+ <div class="gen-spec liquid-glass"><div class="gen-spec-val">340</div><div class="gen-spec-lbl">PS</div></div>
+ <div class="gen-spec liquid-glass"><div class="gen-spec-val">4,2</div><div class="gen-spec-lbl">0–100</div></div>
+ <div class="gen-spec liquid-glass"><div class="gen-spec-val">450</div><div class="gen-spec-lbl">Nm</div></div>
+ <div class="gen-spec liquid-glass"><div class="gen-spec-val">250</div><div class="gen-spec-lbl">km/h</div></div>
+ </div>
+ <div class="gen-highlights liquid-glass" style="background:rgba(255,255,255,0.03);">
+ <div class="gen-hi-title">Highlights</div>
+ <div class="gen-hi-grid">
+ <div class="gen-hi-item">Original 5-Zyl.</div>
+ <div class="gen-hi-item">Carbon Kotfl.</div>
+ <div class="gen-hi-item">Ikonisch</div>
+ <div class="gen-hi-item">Kult-Sound</div>
+ <div class="gen-hi-item">Rallyeerbe</div>
+ <div class="gen-hi-item">Agil</div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- 8V -->
+ <div class="gen-card liquid-glass tilt reveal from-scale reveal-d2">
+ <div class="gen-card-img-wrap">
+ <img src="bilder/rs3-8v.jpg" alt="RS3 8V" class="gen-card-img"
+ onerror="this.src='https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=600&h=400&fit=crop'">
+ </div>
+ <div class="gen-card-body">
+ <span class="gen-badge liquid-glass">8V · 2015–2020</span>
+ <div class="gen-name">Evolution</div>
+ <p class="gen-desc">400 PS, aggressiveres Design, Virtual Cockpit — größer, stärker, raffinierter.</p>
+ <div class="gen-specs-grid">
+ <div class="gen-spec liquid-glass"><div class="gen-spec-val">400</div><div class="gen-spec-lbl">PS</div></div>
+ <div class="gen-spec liquid-glass"><div class="gen-spec-val">3,9</div><div class="gen-spec-lbl">0–100</div></div>
+ <div class="gen-spec liquid-glass"><div class="gen-spec-val">480</div><div class="gen-spec-lbl">Nm</div></div>
+ <div class="gen-spec liquid-glass"><div class="gen-spec-val">280</div><div class="gen-spec-lbl">km/h</div></div>
+ </div>
+ <div class="gen-highlights liquid-glass" style="background:rgba(255,255,255,0.03);">
+ <div class="gen-hi-title">Highlights</div>
+ <div class="gen-hi-grid">
+ <div class="gen-hi-item">400 PS</div>
+ <div class="gen-hi-item">Aggressiv</div>
+ <div class="gen-hi-item">Virtual Cockpit</div>
+ <div class="gen-hi-item">Quattro</div>
+ <div class="gen-hi-item">Qualität</div>
+ <div class="gen-hi-item">Fahrwerk</div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- 8Y -->
+ <div class="gen-card liquid-glass tilt reveal from-scale reveal-d3">
+ <div class="gen-card-img-wrap">
+ <img src="bilder/rs3-8y.jpg" alt="RS3 8Y" class="gen-card-img"
+ onerror="this.src='https://images.unsplash.com/photo-1494976866556-6812c9d1c72e?w=600&h=400&fit=crop'">
+ </div>
+ <div class="gen-card-body">
+ <span class="gen-badge liquid-glass">8Y · 2020–2024</span>
+ <div class="gen-name">Zukunft</div>
+ <p class="gen-desc">407 PS mit Mild-Hybrid. Modernste Technik trifft auf kompromisslose Hochleistung.</p>
+ <div class="gen-specs-grid">
+ <div class="gen-spec liquid-glass"><div class="gen-spec-val">407</div><div class="gen-spec-lbl">PS</div></div>
+ <div class="gen-spec liquid-glass"><div class="gen-spec-val">3,8</div><div class="gen-spec-lbl">0–100</div></div>
+ <div class="gen-spec liquid-glass"><div class="gen-spec-val">480</div><div class="gen-spec-lbl">Nm</div></div>
+ <div class="gen-spec liquid-glass"><div class="gen-spec-val">280</div><div class="gen-spec-lbl">km/h</div></div>
+ </div>
+ <div class="gen-highlights liquid-glass" style="background:rgba(255,255,255,0.03);">
+ <div class="gen-hi-title">Highlights</div>
+ <div class="gen-hi-grid">
+ <div class="gen-hi-item">Mild-Hybrid</div>
+ <div class="gen-hi-item">407 PS</div>
+ <div class="gen-hi-item">MMI Touch</div>
+ <div class="gen-hi-item">LED Matrix</div>
+ <div class="gen-hi-item">Pro Sport</div>
+ <div class="gen-hi-item">Moderne Tech</div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ </div>
+ </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+ BESONDERHEITEN
+═══════════════════════════════════════════ -->
+<section class="aeon-section-alt py-28 px-6 md:px-16">
+ <div class="max-w-5xl mx-auto relative z-10">
+
+ <div class="text-center mb-14 reveal">
+ <p class="section-label">// Highlights</p>
+ <h2 class="aeon-heading text-5xl md:text-6xl lg:text-7xl mb-4">Besonder<em style="font-style:normal;color:rgba(255,255,255,0.35);">heiten</em>
+ </h2>
+ </div>
+
+ <div class="grid md:grid-cols-3 gap-5">
+
+ <div class="liquid-glass aeon-card tilt text-center reveal from-scale reveal-d1">
+ <div class="feat-icon liquid-glass mx-auto" style="width:3.25rem;height:3.25rem;border-radius:1rem;">
+ <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+ <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
+ </svg>
+ </div>
+ <h3 class="aeon-heading text-2xl mt-5 mb-3">Erstveröffentlichung 2011</h3>
+ <p class="aeon-body text-sm">Ein Meilenstein der Automobilgeschichte. Der erste RS3 Sportback — ein Auto das Geschichte schrieb.</p>
+ </div>
+
+ <div class="liquid-glass aeon-card tilt text-center reveal from-scale reveal-d2">
+ <div class="feat-icon liquid-glass mx-auto" style="width:3.25rem;height:3.25rem;border-radius:1rem;">
+ <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+ <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+ </svg>
+ </div>
+ <h3 class="aeon-heading text-2xl mt-5 mb-3">Legendärer 5-Zylinder</h3>
+ <p class="aeon-body text-sm">Der 2.5 TFSI mit unverwechselbarem Sound — eine Hommage an Audis glorreiches Rallyeerbe der 80er Jahre.</p>
+ </div>
+
+ <div class="liquid-glass aeon-card tilt text-center reveal from-scale reveal-d3">
+ <div class="feat-icon liquid-glass mx-auto" style="width:3.25rem;height:3.25rem;border-radius:1rem;">
+ <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+ <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+ </svg>
+ </div>
+ <h3 class="aeon-heading text-2xl mt-5 mb-3">CFRP Kotflügel</h3>
+ <p class="aeon-body text-sm">Verbreiterte Kotflügel aus Kohlefaserverbundstoff — Sportlichkeit trifft auf konsequenten Leichtbau.</p>
+ </div>
+
+ </div>
+ </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+ FOOTER
+═══════════════════════════════════════════ -->
+<footer class="aeon-footer">
+ <div class="max-w-6xl mx-auto px-6 md:px-16">
+ <div class="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
+ <div class="flex items-center gap-4">
+ <div class="liquid-glass w-10 h-10 flex items-center justify-center rounded-full">
+ <svg class="w-6 h-6 text-white" viewBox="0 0 100 100">
+ <circle cx="20" cy="50" r="15" stroke="currentColor" stroke-width="4" fill="none"/>
+ <circle cx="40" cy="50" r="15" stroke="currentColor" stroke-width="4" fill="none"/>
+ <circle cx="60" cy="50" r="15" stroke="currentColor" stroke-width="4" fill="none"/>
+ <circle cx="80" cy="50" r="15" stroke="currentColor" stroke-width="4" fill="none"/>
+ </svg>
+ </div>
+ <div>
+ <p class="font-body font-600 text-sm text-white">Audi RS3 Sportback Evolution</p>
+ <p class="font-body font-300 text-xs text-white/35 mt-0.5">Von 8P bis 8Y</p>
+ </div>
+ </div>
+
+ <nav class="flex items-center gap-1">
+ <a href="#galerie" class="font-body text-xs text-white/40 hover:text-white/70 transition-colors px-3 py-1.5">Galerie</a>
+ 
+ <a href="#video" class="font-body text-xs text-white/40 hover:text-white/70 transition-colors px-3 py-1.5">Video</a>
+ <a href="#geschichte" class="font-body text-xs text-white/40 hover:text-white/70 transition-colors px-3 py-1.5">Geschichte</a>
+ <a href="#generationen" class="font-body text-xs text-white/40 hover:text-white/70 transition-colors px-3 py-1.5">Generationen</a>
+ </nav>
+
+ <div class="text-right">
+ <p class="font-body text-xs text-white/25">Bilder: © AUDI AG & Unsplash</p>
+ <p class="font-body text-xs text-white/15 mt-0.5">Inoffizielles Fan-Projekt</p>
+ </div>
+ </div>
+
+ <div class="border-t border-white/[0.06] pt-6 text-center">
+ <p class="font-body text-xs text-white/20">© 2024 RS3 Tribute · Made with by Auto Enthusiasts</p>
+ </div>
+ </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════
+ JAVASCRIPT
+═══════════════════════════════════════════ -->
+<script>
+/* ── Scroll Reveal ── */
+(function(){
+ const els = document.querySelectorAll('.reveal');
+ const io = new IntersectionObserver(entries => {
+ entries.forEach(e => {
+ if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+ });
+ }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+ els.forEach(el =>io.observe(el));
+})();
+
+/* ── Progress Sidebar ── */
+(function(){
+ const items = document.querySelectorAll('.progress-item');
+ const sections = ['galerie','video','geschichte','generationen'];
+
+ items.forEach(item => {
+ item.addEventListener('click', () => {
+ const id = item.dataset.target;
+ if (id === '__top') {
+ window.scrollTo({ top: 0, behavior: 'smooth' });
+ return;
+ }
+ document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+ });
+ });
+
+ window.addEventListener('scroll', () => {
+ let current = sections[0];
+ sections.forEach(id => {
+ const el = document.getElementById(id);
+ if (el && window.scrollY >= el.offsetTop - 300) current = id;
+ });
+ items.forEach(item =>item.classList.toggle('active', item.dataset.target === current));
+ }, { passive: true });
+})();
+
+/* ── Smooth anchor links ── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+ a.addEventListener('click', e => {
+ const href = a.getAttribute('href');
+ if (href.length >1) {
+ const target = document.querySelector(href);
+ if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+ }
+ });
+});
+
+/* ── Gallery Pagination ── */
+(function(){
+ const pages = document.querySelectorAll('.gallery-page');
+ const dots = document.querySelectorAll('#gDots .page-dot');
+ const prev = document.getElementById('gPrev');
+ const next = document.getElementById('gNext');
+ const info = document.getElementById('gInfo');
+ const total = pages.length;
+ let cur = 1;
+
+ function show(n) {
+ pages.forEach(p =>p.classList.remove('active'));
+ dots.forEach(d =>d.classList.remove('active'));
+ pages[n-1].classList.add('active');
+ dots[n-1].classList.add('active');
+ cur = n;
+ info.textContent = `Seite ${n} von ${total}`;
+ prev.disabled = n === 1;
+ next.disabled = n === total;
+ document.getElementById('galerie').scrollIntoView({ behavior: 'smooth', block: 'start' });
+ // re-trigger reveals for newly shown items
+ document.querySelectorAll('.gallery-page.active .reveal:not(.visible)').forEach(el => {
+ setTimeout(() =>el.classList.add('visible'), 50);
+ });
+ }
+
+ prev.addEventListener('click', () => { if (cur >1) show(cur - 1); });
+ next.addEventListener('click', () => { if (cur < total) show(cur + 1); });
+ dots.forEach(d =>d.addEventListener('click', () =>show(parseInt(d.dataset.page))));
+ show(1);
+})();
+
+/* ── Gallery Modal Zoom ── */
+(function(){
+ const modal = document.getElementById('modal');
+ const img = document.getElementById('modalImg');
+ const caption = document.getElementById('modalCaption');
+ const closeBtn= document.getElementById('modalClose');
+
+ document.querySelectorAll('.gallery-item').forEach((item, i) => {
+ item.addEventListener('click', () => {
+ const src = item.dataset.src;
+ const alt = item.dataset.alt || `Foto ${i+1}`;
+ const num = item.dataset.num || (i+1);
+
+ // Try loading local first, fallback to current img src
+ const probe = new Image();
+ probe.onload = () => { img.src = probe.src; };
+ probe.onerror = () => { img.src = item.querySelector('img').src; };
+ probe.src = src;
+
+ img.alt = alt;
+ caption.textContent = `Foto ${num}`;
+ modal.classList.add('active');
+ document.body.style.overflow = 'hidden';
+ });
+ });
+
+ function close() {
+ modal.classList.remove('active');
+ document.body.style.overflow = '';
+ }
+
+ closeBtn.addEventListener('click', close);
+ modal.addEventListener('click', e => { if (e.target === modal) close(); });
+ document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+})();
+</script>
+
+<!-- ═══════════════════════════════════════════
+ TURBO UPGRADE — JS
+═══════════════════════════════════════════ -->
+<script>
+/* ── Boost progress bar (scroll) ── */
+(function(){
+ const bar = document.createElement('div');
+ bar.id = 'boostBar';
+ document.body.appendChild(bar);
+ function update(){
+ const h = document.documentElement;
+ const scrolled = h.scrollTop;
+ const max = h.scrollHeight - h.clientHeight;
+ const pct = max > 0 ? (scrolled / max) * 100 : 0;
+ bar.style.width = pct + '%';
+ }
+ window.addEventListener('scroll', update, { passive:true });
+ window.addEventListener('resize', update);
+ update();
+})();
+
+/* ── Custom cursor (Tacho-Glow) ── */
+(function(){
+ if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+ document.documentElement.classList.add('turbo-cursor');
+ const dot = document.createElement('div'); dot.id = 'cursorDot';
+ const ring = document.createElement('div'); ring.id = 'cursorRing';
+ document.body.appendChild(dot); document.body.appendChild(ring);
+
+ let mx=innerWidth/2,my=innerHeight/2, rx=mx, ry=my;
+ window.addEventListener('mousemove', e => {
+ mx = e.clientX; my = e.clientY;
+ dot.style.left = mx+'px'; dot.style.top = my+'px';
+ const target = e.target.closest('a, button, .gallery-item, .aeon-card, .gen-card, .liquid-glass, .page-dot, .progress-item');
+ ring.classList.toggle('hovering', !!target);
+ }, { passive:true });
+ window.addEventListener('mousedown', () => ring.classList.add('clicking'));
+ window.addEventListener('mouseup', () => ring.classList.remove('clicking'));
+ (function loop(){
+ rx += (mx-rx)*0.18; ry += (my-ry)*0.18;
+ ring.style.left = rx+'px'; ring.style.top = ry+'px';
+ requestAnimationFrame(loop);
+ })();
+
+ /* Funken bei Klick */
+ window.addEventListener('click', e => {
+ const n = 8;
+ for (let i=0;i<n;i++){
+ const s = document.createElement('div');
+ s.className = 'spark-burst';
+ const ang = (Math.PI*2*i)/n + Math.random()*0.4;
+ const dist = 30 + Math.random()*30;
+ s.style.left = e.clientX+'px';
+ s.style.top = e.clientY+'px';
+ s.style.setProperty('--sx', Math.cos(ang)*dist+'px');
+ s.style.setProperty('--sy', Math.sin(ang)*dist+'px');
+ document.body.appendChild(s);
+ setTimeout(()=>s.remove(), 650);
+ }
+ });
+})();
+
+/* ── 3D Tilt für Karten ── */
+(function(){
+ if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+ const selector = '.aeon-card, .gen-card, .spec-hero-card';
+ function attach(){
+ document.querySelectorAll(selector).forEach(el => {
+ if (el.dataset.tiltBound) return;
+ el.dataset.tiltBound = '1';
+ el.classList.add('tilt-target');
+ el.addEventListener('mousemove', e => {
+ const r = el.getBoundingClientRect();
+ const px = (e.clientX - r.left) / r.width - 0.5;
+ const py = (e.clientY - r.top) / r.height - 0.5;
+ el.style.transform = `perspective(700px) rotateY(${px*8}deg) rotateX(${-py*8}deg) translateY(-4px)`;
+ });
+ el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+ });
+ }
+ attach();
+ new MutationObserver(attach).observe(document.body, { childList:true, subtree:true });
+})();
+
+/* ── Magnetische Buttons ── */
+(function(){
+ if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+ function attach(){
+ document.querySelectorAll('.aeon-btn').forEach(btn => {
+ if (btn.dataset.magBound) return;
+ btn.dataset.magBound = '1';
+ btn.addEventListener('mousemove', e => {
+ const r = btn.getBoundingClientRect();
+ const mx = e.clientX - (r.left + r.width/2);
+ const my = e.clientY - (r.top + r.height/2);
+ btn.style.transform = `translate(${mx*0.25}px, ${my*0.25}px)`;
+ });
+ btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+ });
+ }
+ attach();
+ new MutationObserver(attach).observe(document.body, { childList:true, subtree:true });
+})();
+
+/* ── Speed-streak Canvas im Hero (Motion-Feeling) ── */
+(function(){
+ function init(){
+ const hero = document.querySelector('main section, .relative.w-full.h-screen');
+ if (!hero || document.getElementById('speedCanvas')) return;
+ const canvas = document.createElement('canvas');
+ canvas.id = 'speedCanvas';
+ hero.style.position = hero.style.position || 'relative';
+ hero.prepend(canvas);
+ const ctx = canvas.getContext('2d');
+ let w,h;
+ function resize(){ w = canvas.width = hero.clientWidth; h = canvas.height = hero.clientHeight; }
+ resize(); window.addEventListener('resize', resize);
+
+ const N = 40;
+ const streaks = Array.from({length:N}, () => ({
+ x: Math.random()*w, y: Math.random()*h,
+ len: 60+Math.random()*160,
+ speed: 4+Math.random()*10,
+ alpha: 0.05+Math.random()*0.18,
+ }));
+ function frame(){
+ ctx.clearRect(0,0,w,h);
+ ctx.lineCap = 'round';
+ streaks.forEach(s => {
+ ctx.strokeStyle = `rgba(220,38,38,${s.alpha})`;
+ ctx.lineWidth = 1.2;
+ ctx.beginPath();
+ ctx.moveTo(s.x, s.y);
+ ctx.lineTo(s.x - s.len, s.y);
+ ctx.stroke();
+ s.x += s.speed;
+ if (s.x - s.len > w) { s.x = -Math.random()*200; s.y = Math.random()*h; }
+ });
+ requestAnimationFrame(frame);
+ }
+ frame();
+ }
+ window.addEventListener('load', () => setTimeout(init, 300));
+ setTimeout(init, 1200);
+})();
+
+/* ── Nahtloser Video-Loop (Crossfade statt hartem Neustart) ── */
+(function(){
+ const A = document.getElementById('bgVidA');
+ const B = document.getElementById('bgVidB');
+ if (!A || !B) return;
+ const FADE = 0.9; // Sekunden Überblendzeit vor Loop-Ende
+ let active = A, next = B;
+ let switching = false;
+
+ function startCycle(v){
+ try { v.currentTime = 0; } catch(_) {}
+ const p = v.play();
+ if (p && p.catch) p.catch(()=>{});
+ v.classList.add('is-live');
+ }
+
+ startCycle(active);
+
+ function tick(){
+ const v = active;
+ if (v.duration && isFinite(v.duration)) {
+ const remaining = v.duration - v.currentTime;
+ if (!switching && remaining <= FADE && remaining > 0) {
+ switching = true;
+ startCycle(next);
+ active.classList.remove('is-live');
+ const oldActive = active;
+ active = next;
+ next = oldActive;
+ setTimeout(() => { switching = false; try{ oldActive.pause(); }catch(_){} }, FADE*1000 + 150);
+ }
+ }
+ requestAnimationFrame(tick);
+ }
+ requestAnimationFrame(tick);
+})();
+</script>
+
+</body>
+</html>
